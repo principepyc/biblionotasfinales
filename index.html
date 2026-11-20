@@ -1,0 +1,4990 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1118" />
+  <title>La Bóveda de las 3 Llaves · Cierre de Bibliotecología 2026</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23fff2c6'/%3E%3Cstop offset='50%25' stop-color='%23d9a74a'/%3E%3Cstop offset='100%25' stop-color='%238c5e18'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='32' cy='32' r='30' fill='%230b1118' stroke='url(%23g)' stroke-width='3.5'/%3E%3Ccircle cx='32' cy='32' r='23' fill='none' stroke='%2334d399' stroke-opacity='0.45' stroke-width='1.5' stroke-dasharray='4 4'/%3E%3Ccircle cx='24' cy='39' r='8.5' fill='none' stroke='url(%23g)' stroke-width='4.2'/%3E%3Cpath d='M30.5 32.5 L47 16 M41 22 L46 27 M36 27 L40 31' stroke='url(%23g)' stroke-width='4.2' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-void: #06090d;
+      --bg-chamber: #0b1118;
+      --bg-obsidian: #111923;
+      --bg-panel: rgba(13, 21, 30, 0.88);
+      --bg-panel-solid: #0f1822;
+      --brass-bright: #fae2a3;
+      --brass: #d9a74a;
+      --brass-mid: #b37e28;
+      --brass-dark: #6b4814;
+      --brass-glow: rgba(217, 167, 74, 0.36);
+      --emerald: #34d399;
+      --emerald-deep: #064e3b;
+      --cyan-glow: #38bdf8;
+      --crimson: #b91c1c;
+      --crimson-wax: #991b1b;
+      --parchment-light: #fcf7eb;
+      --parchment-mid: #f3e6cc;
+      --parchment-dark: #dcc395;
+      --ink-dark: #261b0e;
+      --ink-muted: #5a4326;
+      --text-primary: #f6f0e4;
+      --text-secondary: #b9c2cc;
+      --text-dim: #7f8c9b;
+      --font-display: 'Cinzel', Georgia, 'Times New Roman', serif;
+      --font-editorial: 'Cormorant Garamond', Georgia, Cambria, serif;
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      --mx: 50%;
+      --my: 45%;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      color-scheme: dark;
+      background-color: var(--bg-void);
+    }
+
+    body {
+      margin: 0;
+      min-height: 100dvh;
+      font-family: var(--font-sans);
+      color: var(--text-primary);
+      background:
+        radial-gradient(circle at var(--mx) var(--my), rgba(217, 167, 74, 0.14) 0%, rgba(217, 167, 74, 0.03) 26%, transparent 56%),
+        radial-gradient(ellipse 85% 65% at 50% 0%, #152230 0%, transparent 62%),
+        radial-gradient(ellipse 75% 60% at 50% 100%, #0d211d 0%, transparent 64%),
+        var(--bg-void);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Subtle engraved chamber vignette & grain */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      background:
+        radial-gradient(circle at 50% 45%, transparent 38%, rgba(3, 5, 8, 0.72) 100%);
+    }
+
+    /* Atmospheric Canvas (dust motes, light rays, sparks) */
+    #ambient-canvas,
+    #fx-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    #ambient-canvas {
+      z-index: 0;
+    }
+
+    #fx-canvas {
+      z-index: 60;
+    }
+
+    /* Visually hidden utility for screen readers */
+    .visually-hidden:where(:not(:focus-within, :active)) {
+      position: absolute !important;
+      clip-path: inset(50%) !important;
+      overflow: hidden !important;
+      width: 1px !important;
+      height: 1px !important;
+      margin: -1px !important;
+      padding: 0 !important;
+      border: 0 !important;
+      white-space: nowrap !important;
+    }
+
+    /* Accessible Focus Styles */
+    :where(button, a, input, textarea, [tabindex]):focus-visible {
+      outline: 3px solid var(--brass-bright);
+      outline-offset: 3px;
+    }
+
+    [tabindex="-1"]:focus {
+      outline: none;
+    }
+
+    /* View Transitions */
+    @media (prefers-reduced-motion: reduce) {
+      ::view-transition-group(*),
+      ::view-transition-old(*),
+      ::view-transition-new(*) {
+        animation: none !important;
+      }
+    }
+
+    /* Floating Minimal Game HUD */
+    .game-hud {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.85rem clamp(0.9rem, 2.5vw, 1.8rem);
+      pointer-events: none;
+    }
+
+    .hud-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      pointer-events: auto;
+    }
+
+    .hud-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.45rem 0.9rem 0.45rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(9, 14, 21, 0.78);
+      border: 1px solid rgba(217, 167, 74, 0.28);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .hud-emblem {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(circle at 35% 30%, #fae2a3, #9e6b1b);
+      color: #160f05;
+      flex-shrink: 0;
+      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.55), 0 0 12px rgba(217, 167, 74, 0.4);
+    }
+
+    .hud-brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+    }
+
+    .hud-brand-title {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--brass-bright);
+    }
+
+    .hud-brand-sub {
+      font-size: 0.68rem;
+      color: var(--text-dim);
+      max-width: 220px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .hud-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.45rem 0.85rem;
+      border-radius: 999px;
+      background: rgba(9, 14, 21, 0.8);
+      border: 1px solid rgba(217, 167, 74, 0.3);
+      backdrop-filter: blur(12px);
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--brass-bright);
+    }
+
+    .hud-pill[hidden] {
+      display: none;
+    }
+
+    .hud-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      min-block-size: 38px;
+      min-inline-size: 38px;
+      padding: 0.45rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(217, 167, 74, 0.25);
+      background: rgba(9, 14, 21, 0.78);
+      color: var(--text-secondary);
+      font-family: inherit;
+      font-size: 0.76rem;
+      font-weight: 600;
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+      transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease, transform 0.15s ease;
+    }
+
+    .hud-btn:hover {
+      border-color: rgba(250, 226, 163, 0.65);
+      color: var(--brass-bright);
+      background: rgba(24, 34, 46, 0.9);
+    }
+
+    .hud-btn:active {
+      transform: scale(0.96);
+    }
+
+    /* Main Stage */
+    .stage {
+      position: relative;
+      z-index: 10;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4.8rem clamp(0.85rem, 2.5vw, 2rem) 2.5rem;
+    }
+
+    .scene {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .scene[hidden] {
+      display: none;
+    }
+
+    /* Typography helpers */
+    .font-display {
+      font-family: var(--font-display);
+    }
+
+    .font-editorial {
+      font-family: var(--font-editorial);
+    }
+
+    .gold-text {
+      background: linear-gradient(135deg, #fff3cf 0%, #e7be6a 42%, #be852a 76%, #f8df9f 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Metallic Brass & Obsidian Panels */
+    .vault-panel {
+      position: relative;
+      border-radius: 26px;
+      background:
+        linear-gradient(160deg, rgba(22, 33, 46, 0.92) 0%, rgba(10, 16, 24, 0.95) 100%);
+      border: 1px solid rgba(217, 167, 74, 0.3);
+      box-shadow:
+        0 28px 70px rgba(0, 0, 0, 0.62),
+        inset 0 1px 0 rgba(250, 226, 163, 0.16),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(16px);
+    }
+
+    /* Luxury Primary Button */
+    .btn-brass {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      min-block-size: 48px;
+      padding: 0.78rem 1.65rem;
+      border: 1px solid #fae2a3;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #f6dc99 0%, #d49e3d 52%, #b0791e 100%);
+      color: #191105;
+      font-family: var(--font-display);
+      font-size: 0.92rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow:
+        0 10px 30px rgba(212, 158, 61, 0.34),
+        inset 0 1px 1px rgba(255, 255, 255, 0.7);
+      transition: transform 0.18s ease, box-shadow 0.2s ease, filter 0.2s ease;
+      overflow: hidden;
+    }
+
+    .btn-brass:hover:not(:disabled) {
+      transform: translateY(-2px);
+      filter: brightness(1.07);
+      box-shadow: 0 16px 36px rgba(231, 190, 106, 0.45);
+    }
+
+    .btn-brass:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    .btn-brass:disabled {
+      opacity: 0.42;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      min-block-size: 42px;
+      padding: 0.55rem 1.1rem;
+      border-radius: 12px;
+      border: 1px solid rgba(217, 167, 74, 0.28);
+      background: rgba(15, 24, 34, 0.78);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .btn-ghost:hover {
+      border-color: rgba(250, 226, 163, 0.65);
+      background: rgba(26, 39, 54, 0.92);
+      color: var(--brass-bright);
+    }
+
+    /* ============================================================
+       SCENE 1: EL UMBRAL (THRESHOLD / ENTRY)
+       ============================================================ */
+    .threshold-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+      gap: clamp(1.5rem, 3.5vw, 3rem);
+      align-items: center;
+    }
+
+    @media (max-width: 880px) {
+      .threshold-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+    }
+
+    .crest-showcase {
+      position: relative;
+      display: grid;
+      place-items: center;
+      aspect-ratio: 1 / 1;
+      max-width: 440px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .crest-aura {
+      position: absolute;
+      inset: 8%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(217, 167, 74, 0.26) 0%, rgba(52, 211, 153, 0.08) 48%, transparent 72%);
+      filter: blur(18px);
+      pointer-events: none;
+    }
+
+    .crest-svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      filter: drop-shadow(0 24px 42px rgba(0, 0, 0, 0.75));
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      body:not(.motion-paused) .spin-slow {
+        transform-origin: 200px 200px;
+        animation: spinCW 48s linear infinite;
+      }
+      body:not(.motion-paused) .spin-reverse {
+        transform-origin: 200px 200px;
+        animation: spinCCW 34s linear infinite;
+      }
+      body:not(.motion-paused) .float-gentle {
+        animation: floatGentle 4.8s ease-in-out infinite;
+      }
+    }
+
+    @keyframes spinCW {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes spinCCW {
+      to { transform: rotate(-360deg); }
+    }
+
+    @keyframes floatGentle {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-7px); }
+    }
+
+    .eyebrow-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.38rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(250, 226, 163, 0.35);
+      background: rgba(217, 167, 74, 0.12);
+      color: var(--brass-bright);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .threshold-title {
+      margin: 0.9rem 0 0;
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4.4vw, 3.25rem);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: 0.02em;
+    }
+
+    .threshold-lead {
+      margin: 1rem 0 0;
+      font-family: var(--font-editorial);
+      font-size: clamp(1.18rem, 2vw, 1.38rem);
+      line-height: 1.55;
+      color: #ded6c7;
+    }
+
+    /* Wax-sealed Researcher Credential Input Card */
+    .credential-card {
+      margin-top: 1.5rem;
+      padding: 1.35rem 1.45rem;
+      border-radius: 20px;
+      background:
+        linear-gradient(145deg, rgba(24, 34, 47, 0.92), rgba(11, 17, 25, 0.96));
+      border: 1px solid rgba(217, 167, 74, 0.34);
+      box-shadow: 0 20px 44px rgba(0, 0, 0, 0.48), inset 0 1px 0 rgba(250, 226, 163, 0.14);
+      text-align: left;
+    }
+
+    .credential-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px dashed rgba(217, 167, 74, 0.25);
+    }
+
+    .credential-label-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--brass);
+    }
+
+    .credential-preview-name {
+      font-family: var(--font-editorial);
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--brass-bright);
+      min-height: 1.3em;
+    }
+
+    .input-wrap {
+      margin-top: 0.95rem;
+    }
+
+    .input-wrap label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 0.35rem;
+    }
+
+    .input-hint {
+      display: block;
+      font-size: 0.73rem;
+      color: var(--text-dim);
+      margin-bottom: 0.5rem;
+    }
+
+    .brass-input {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border-radius: 12px;
+      border: 1px solid rgba(217, 167, 74, 0.35);
+      background: rgba(5, 9, 14, 0.86);
+      color: #fffaf0;
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .brass-input::placeholder {
+      color: #627080;
+    }
+
+    .brass-input:focus {
+      border-color: var(--brass-bright);
+      box-shadow: 0 0 0 3px rgba(217, 167, 74, 0.22);
+    }
+
+    .error-msg {
+      margin: 0.45rem 0 0;
+      font-size: 0.78rem;
+      color: #fda4af;
+    }
+
+    .error-msg[hidden] {
+      display: none;
+    }
+
+    .threshold-actions {
+      margin-top: 1.05rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem;
+    }
+
+    .subject-mini-strip {
+      margin-top: 1.35rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+
+    @media (max-width: 880px) {
+      .subject-mini-strip {
+        justify-content: center;
+      }
+    }
+
+    .subject-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.42rem;
+      padding: 0.36rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(15, 24, 34, 0.78);
+      border: 1px solid rgba(217, 167, 74, 0.2);
+      font-size: 0.73rem;
+      color: var(--text-secondary);
+    }
+
+    .subject-chip .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+    }
+
+    /* ============================================================
+       SCENE 2: LA CÁMARA CENTRAL (THE INTERACTIVE MECHANICAL VAULT)
+       ============================================================ */
+    .chamber-layout {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 1.15rem;
+      align-items: center;
+    }
+
+    .chamber-header {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .chamber-title {
+      margin: 0.3rem 0 0;
+      font-family: var(--font-display);
+      font-size: clamp(1.45rem, 3vw, 2.15rem);
+      font-weight: 800;
+      line-height: 1.15;
+    }
+
+    .chamber-subtitle {
+      margin: 0.4rem 0 0;
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+    }
+
+    /* Interactive Vault Arena */
+    .vault-arena {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) minmax(290px, 410px) minmax(220px, 1fr);
+      gap: 1.25rem;
+      align-items: center;
+      padding: 0.5rem 0;
+    }
+
+    @media (max-width: 960px) {
+      .vault-arena {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      .vault-center-col {
+        order: -1;
+      }
+    }
+
+    .vault-side-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    /* Centerpiece Mechanical Vault Door */
+    .vault-center-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.9rem;
+    }
+
+    .vault-door-frame {
+      position: relative;
+      width: min(390px, 84vw);
+      aspect-ratio: 1 / 1;
+      display: grid;
+      place-items: center;
+      perspective: 1200px;
+    }
+
+    .vault-door-glow {
+      position: absolute;
+      inset: 4%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(217, 167, 74, 0.16) 0%, transparent 70%);
+      transition: opacity 0.6s ease, transform 0.6s ease, background 0.6s ease;
+      pointer-events: none;
+    }
+
+    .vault-door-frame.all-unlocked .vault-door-glow {
+      background: radial-gradient(circle, rgba(250, 226, 163, 0.52) 0%, rgba(52, 211, 153, 0.16) 45%, transparent 72%);
+      transform: scale(1.1);
+    }
+
+    .vault-svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      filter: drop-shadow(0 28px 50px rgba(0, 0, 0, 0.8));
+    }
+
+    /* Mechanical Bolts Animation */
+    .vault-bolt {
+      transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s ease;
+    }
+
+    .vault-bolt-1.retracted { transform: translate(22px, 16px); }
+    .vault-bolt-2.retracted { transform: translate(-22px, 16px); }
+    .vault-bolt-3.retracted { transform: translate(0, -24px); }
+
+    .vault-conduit {
+      stroke-dasharray: 120;
+      stroke-dashoffset: 120;
+      transition: stroke-dashoffset 0.9s ease, opacity 0.5s ease;
+      opacity: 0.2;
+    }
+
+    .vault-conduit.lit {
+      stroke-dashoffset: 0;
+      opacity: 1;
+    }
+
+    .vault-wheel-group {
+      transform-origin: 200px 200px;
+      transition: transform 1.6s cubic-bezier(0.45, 0.05, 0.2, 1);
+    }
+
+    .vault-door-frame.spinning .vault-wheel-group {
+      transform: rotate(540deg);
+    }
+
+    /* Interactive Wheel Hit Button Overlay */
+    .wheel-trigger-btn {
+      position: absolute;
+      width: 44%;
+      height: 44%;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      background: transparent;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      color: var(--brass-bright);
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: transform 0.22s ease, box-shadow 0.25s ease;
+    }
+
+    .wheel-trigger-btn:disabled {
+      cursor: default;
+    }
+
+    .wheel-trigger-btn:not(:disabled) {
+      border-color: rgba(250, 226, 163, 0.75);
+      background: radial-gradient(circle, rgba(250, 226, 163, 0.26) 0%, rgba(217, 167, 74, 0.08) 65%, transparent 100%);
+      box-shadow: 0 0 36px rgba(250, 226, 163, 0.48), inset 0 0 24px rgba(250, 226, 163, 0.25);
+    }
+
+    .wheel-trigger-btn:not(:disabled):hover {
+      transform: scale(1.06);
+      box-shadow: 0 0 54px rgba(250, 226, 163, 0.75), inset 0 0 30px rgba(250, 226, 163, 0.4);
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      body:not(.motion-paused) .wheel-trigger-btn:not(:disabled) {
+        animation: pulseBeacon 2s ease-in-out infinite;
+      }
+    }
+
+    @keyframes pulseBeacon {
+      0%, 100% { box-shadow: 0 0 28px rgba(250, 226, 163, 0.45), 0 0 0 0 rgba(250, 226, 163, 0.5); }
+      50% { box-shadow: 0 0 48px rgba(250, 226, 163, 0.8), 0 0 0 18px rgba(250, 226, 163, 0); }
+    }
+
+    .wheel-label-pill {
+      padding: 0.34rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(8, 13, 20, 0.9);
+      border: 1px solid rgba(250, 226, 163, 0.65);
+      color: var(--brass-bright);
+      text-shadow: 0 0 12px rgba(250, 226, 163, 0.6);
+      white-space: nowrap;
+    }
+
+    /* Tactile Lock Medallion Cards around the Vault */
+    .lock-station {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      padding: 1.15rem 1.2rem;
+      border-radius: 20px;
+      border: 1px solid rgba(217, 167, 74, 0.28);
+      background: linear-gradient(155deg, rgba(19, 29, 41, 0.92), rgba(10, 15, 22, 0.96));
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.48), inset 0 1px 0 rgba(250, 226, 163, 0.12);
+      text-align: left;
+      width: 100%;
+      cursor: pointer;
+      color: var(--text-primary);
+      font-family: inherit;
+      transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .lock-station:hover {
+      transform: translateY(-4px);
+      border-color: rgba(250, 226, 163, 0.72);
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.58), 0 0 24px rgba(217, 167, 74, 0.2);
+    }
+
+    .lock-station.is-unlocked {
+      border-color: rgba(52, 211, 153, 0.55);
+      background: linear-gradient(155deg, rgba(11, 36, 31, 0.9), rgba(9, 19, 22, 0.95));
+      box-shadow: 0 16px 38px rgba(0, 0, 0, 0.45), 0 0 26px rgba(52, 211, 153, 0.16);
+    }
+
+    .lock-station-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .lock-sigil {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(217, 167, 74, 0.38);
+      background: rgba(217, 167, 74, 0.12);
+      color: var(--brass-bright);
+      flex-shrink: 0;
+    }
+
+    .lock-station.is-unlocked .lock-sigil {
+      border-color: rgba(52, 211, 153, 0.5);
+      background: rgba(52, 211, 153, 0.15);
+      color: var(--emerald);
+    }
+
+    .lock-state-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.26rem 0.65rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: rgba(15, 23, 35, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      color: #cbd5e1;
+    }
+
+    .lock-station.is-unlocked .lock-state-tag {
+      background: rgba(6, 78, 59, 0.65);
+      border-color: rgba(52, 211, 153, 0.55);
+      color: #a7f3d0;
+    }
+
+    .lock-kicker {
+      font-size: 0.69rem;
+      font-weight: 700;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      color: var(--brass);
+    }
+
+    .lock-station.is-unlocked .lock-kicker {
+      color: var(--emerald);
+    }
+
+    .lock-name {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: 0.98rem;
+      font-weight: 700;
+      line-height: 1.3;
+      color: #fff;
+    }
+
+    .lock-desc {
+      margin: 0;
+      font-size: 0.81rem;
+      line-height: 1.48;
+      color: var(--text-secondary);
+    }
+
+    .lock-cta {
+      margin-top: 0.2rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--brass-bright);
+    }
+
+    .lock-station.is-unlocked .lock-cta {
+      color: var(--emerald);
+    }
+
+    /* Key Inventory Velvet Tray */
+    .key-tray {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.9rem;
+      padding: 0.75rem 1.25rem;
+      border-radius: 20px;
+      background: rgba(9, 14, 21, 0.82);
+      border: 1px solid rgba(217, 167, 74, 0.26);
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .key-slot {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 14px;
+      border: 1px dashed rgba(217, 167, 74, 0.28);
+      background: rgba(5, 9, 14, 0.65);
+      min-width: 195px;
+      transition: border-color 0.4s ease, background-color 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .key-slot.forged {
+      border-style: solid;
+      border-color: rgba(250, 226, 163, 0.65);
+      background: linear-gradient(135deg, rgba(217, 167, 74, 0.18), rgba(52, 211, 153, 0.08));
+      box-shadow: 0 0 22px rgba(217, 167, 74, 0.22);
+    }
+
+    .key-icon-wrap {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: rgba(255, 255, 255, 0.03);
+      color: #475569;
+      transition: color 0.4s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .key-slot.forged .key-icon-wrap {
+      color: var(--brass-bright);
+      background: rgba(217, 167, 74, 0.16);
+      transform: rotate(-12deg) scale(1.08);
+    }
+
+    .key-slot-meta {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+
+    .key-slot-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .key-slot.forged .key-slot-title {
+      color: var(--brass-bright);
+    }
+
+    .key-slot-sub {
+      font-size: 0.74rem;
+      color: #64748b;
+    }
+
+    .key-slot.forged .key-slot-sub {
+      color: #d1fae5;
+    }
+
+    /* ============================================================
+       CINEMATIC VAULT OPENING OVERLAY
+       ============================================================ */
+    .vault-cinematic {
+      position: fixed;
+      inset: 0;
+      z-index: 55;
+      display: grid;
+      place-items: center;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .vault-cinematic[hidden] {
+      display: none;
+    }
+
+    .cinematic-door {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 50.5%;
+      background:
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.015) 0 2px, transparent 2px 12px),
+        linear-gradient(180deg, #16202b 0%, #0a1017 50%, #121b25 100%);
+      border-color: var(--brass);
+      transition: transform 1.45s cubic-bezier(0.7, 0, 0.2, 1);
+    }
+
+    .cinematic-door-left {
+      left: 0;
+      border-right: 4px solid var(--brass);
+      box-shadow: inset -24px 0 60px rgba(0, 0, 0, 0.8);
+      transform: translateX(0);
+    }
+
+    .cinematic-door-right {
+      right: 0;
+      border-left: 4px solid var(--brass);
+      box-shadow: inset 24px 0 60px rgba(0, 0, 0, 0.8);
+      transform: translateX(0);
+    }
+
+    .vault-cinematic.open .cinematic-door-left {
+      transform: translateX(-105%);
+    }
+
+    .vault-cinematic.open .cinematic-door-right {
+      transform: translateX(105%);
+    }
+
+    .cinematic-seam-light {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(255, 245, 210, 0.95) 0%, rgba(217, 167, 74, 0.65) 32%, transparent 72%);
+      opacity: 0;
+      transform: scale(0.2);
+      transition: opacity 0.8s ease, transform 1.1s ease;
+    }
+
+    .vault-cinematic.burst .cinematic-seam-light {
+      opacity: 1;
+      transform: scale(2.2);
+    }
+
+    .vault-cinematic.fade .cinematic-seam-light {
+      opacity: 0;
+    }
+
+    .cinematic-caption {
+      position: relative;
+      z-index: 2;
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 3.2vw, 2.4rem);
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--brass-bright);
+      text-shadow: 0 0 30px rgba(217, 167, 74, 0.9);
+      opacity: 0;
+      transition: opacity 0.45s ease;
+    }
+
+    .vault-cinematic.show-caption .cinematic-caption {
+      opacity: 1;
+    }
+
+    /* ============================================================
+       PUZZLE SHARED CHROME
+       ============================================================ */
+    .puzzle-shell {
+      padding: clamp(1.2rem, 3vw, 2.2rem);
+    }
+
+    .puzzle-topbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .puzzle-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      border: 1px solid rgba(217, 167, 74, 0.38);
+      background: rgba(217, 167, 74, 0.12);
+      color: var(--brass-bright);
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .puzzle-heading {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 2.8vw, 2rem);
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .puzzle-story {
+      margin: 0.55rem 0 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      max-width: 78ch;
+    }
+
+    .puzzle-feedback {
+      margin-top: 1.25rem;
+      padding: 1rem 1.2rem;
+      border-radius: 16px;
+      border: 1px solid rgba(217, 167, 74, 0.35);
+      background: rgba(15, 24, 34, 0.88);
+      font-size: 0.9rem;
+      line-height: 1.5;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.9rem;
+    }
+
+    .puzzle-feedback[hidden] {
+      display: none;
+    }
+
+    .puzzle-feedback.is-success {
+      border-color: rgba(52, 211, 153, 0.6);
+      background: rgba(6, 78, 59, 0.38);
+      color: #d1fae5;
+    }
+
+    .puzzle-feedback.is-error {
+      border-color: rgba(251, 113, 133, 0.55);
+      background: rgba(136, 19, 55, 0.32);
+      color: #ffe4e6;
+    }
+
+    .puzzle-feedback.is-hint {
+      border-color: rgba(250, 226, 163, 0.5);
+      background: rgba(120, 53, 15, 0.32);
+      color: #fef3c7;
+    }
+
+    /* ============================================================
+       PUZZLE 1: EL TABLERO DE METADATOS (INTERACTIVE CABLE PATCHBAY)
+       ============================================================ */
+    .patchbay-console {
+      margin-top: 1.35rem;
+      padding: clamp(1rem, 2.2vw, 1.5rem);
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.1), transparent 60%),
+        linear-gradient(180deg, #0a121b 0%, #070d14 100%);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.65);
+    }
+
+    .telemetry-strip {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem;
+      padding: 0.7rem 1rem;
+      margin-bottom: 1.15rem;
+      border-radius: 14px;
+      background: rgba(4, 9, 15, 0.85);
+      border: 1px solid rgba(56, 189, 248, 0.22);
+    }
+
+    .telemetry-status {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+      font-size: 0.78rem;
+      color: #7dd3fc;
+      letter-spacing: 0.04em;
+    }
+
+    .telemetry-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #f59e0b;
+      box-shadow: 0 0 10px #f59e0b;
+    }
+
+    .telemetry-dot.online {
+      background: var(--emerald);
+      box-shadow: 0 0 12px var(--emerald);
+    }
+
+    .telemetry-meter {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      min-width: 190px;
+    }
+
+    .telemetry-bar-track {
+      flex: 1;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.18);
+      overflow: hidden;
+    }
+
+    .telemetry-bar-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #38bdf8, #34d399, #fae2a3);
+      transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .patchbay-board {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(70px, 140px) minmax(0, 1fr);
+      gap: 0.5rem;
+      align-items: stretch;
+      user-select: none;
+    }
+
+    @media (max-width: 740px) {
+      .patchbay-board {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      .patchbay-wire-layer {
+        display: none;
+      }
+      .patchbay-spacer {
+        display: none;
+      }
+    }
+
+    .patchbay-col {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .patchbay-col-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 0.15rem;
+    }
+
+    .patchbay-wire-layer {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: visible;
+    }
+
+    .patch-node {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.85rem;
+      width: 100%;
+      padding: 0.95rem 1.05rem;
+      border-radius: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      background: linear-gradient(145deg, rgba(19, 30, 44, 0.95), rgba(10, 16, 25, 0.98));
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.87rem;
+      line-height: 1.42;
+      text-align: left;
+      cursor: pointer;
+      transition: border-color 0.2s ease, transform 0.16s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    }
+
+    .patch-node:hover:not(:disabled) {
+      border-color: rgba(250, 226, 163, 0.65);
+      transform: translateY(-2px);
+    }
+
+    .patch-node.is-selected {
+      border-color: #38bdf8;
+      background: linear-gradient(145deg, rgba(14, 49, 73, 0.95), rgba(10, 25, 41, 0.98));
+      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.35), 0 0 24px rgba(56, 189, 248, 0.28);
+    }
+
+    .patch-node.is-matched {
+      border-color: rgba(52, 211, 153, 0.65);
+      background: linear-gradient(145deg, rgba(6, 62, 48, 0.55), rgba(8, 28, 25, 0.9));
+      color: #d1fae5;
+      cursor: default;
+    }
+
+    .patch-node.is-wrong {
+      border-color: #fb7185;
+      box-shadow: 0 0 18px rgba(251, 113, 133, 0.4);
+    }
+
+    .jack-socket {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      border: 3px solid var(--brass);
+      background: radial-gradient(circle, #06090d 35%, #3a2a12 100%);
+      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.7), inset 0 0 6px rgba(0, 0, 0, 0.9);
+      transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    }
+
+    .patch-node.is-selected .jack-socket {
+      border-color: #7dd3fc;
+      background: radial-gradient(circle, #e0f2fe 20%, #0284c7 100%);
+      box-shadow: 0 0 14px #38bdf8;
+    }
+
+    .patch-node.is-matched .jack-socket {
+      border-color: #6ee7b7;
+      background: radial-gradient(circle, #ecfdf5 20%, #10b981 100%);
+      box-shadow: 0 0 14px var(--emerald);
+    }
+
+    .patch-node-code {
+      display: block;
+      font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      color: #7dd3fc;
+      margin-bottom: 0.2rem;
+    }
+
+    .patch-node.is-matched .patch-node-code {
+      color: #6ee7b7;
+    }
+
+    /* ============================================================
+       PUZZLE 2: LA BALANZA DEL ARCHIVO (ETHICAL DOSSIER + WAX SEAL)
+       ============================================================ */
+    .ethics-layout {
+      margin-top: 1.35rem;
+      display: grid;
+      grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1.28fr);
+      gap: 1.25rem;
+      align-items: start;
+    }
+
+    @media (max-width: 820px) {
+      .ethics-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .scale-chamber {
+      padding: 1.25rem;
+      border-radius: 20px;
+      background: radial-gradient(circle at 50% 30%, rgba(217, 167, 74, 0.14), rgba(8, 13, 20, 0.94));
+      border: 1px solid rgba(217, 167, 74, 0.28);
+      text-align: center;
+    }
+
+    .scale-svg {
+      width: 100%;
+      max-width: 240px;
+      height: auto;
+      margin: 0 auto;
+      display: block;
+    }
+
+    .scale-beam {
+      transform-origin: 120px 66px;
+      transition: transform 0.75s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .scale-meter-caption {
+      margin-top: 0.65rem;
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--brass-bright);
+    }
+
+    .scale-meter-sub {
+      margin: 0.3rem 0 0;
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      line-height: 1.45;
+    }
+
+    /* Parchment Case Dossier */
+    .dossier-card {
+      position: relative;
+      padding: clamp(1.25rem, 2.5vw, 1.75rem);
+      border-radius: 20px;
+      background:
+        linear-gradient(175deg, #fbf4e4 0%, #f1e2c5 100%);
+      color: var(--ink-dark);
+      border: 2px solid #c99d4a;
+      box-shadow: 0 22px 50px rgba(0, 0, 0, 0.52), inset 0 0 36px rgba(139, 94, 29, 0.14);
+      overflow: hidden;
+    }
+
+    .dossier-stamp-corner {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.24rem 0.68rem;
+      border: 1.5px solid #991b1b;
+      border-radius: 6px;
+      color: #991b1b;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transform: rotate(-1.5deg);
+    }
+
+    .dossier-tag {
+      margin: 0.75rem 0 0;
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: #7c4e12;
+    }
+
+    .dossier-question {
+      margin: 0.45rem 0 0;
+      font-family: var(--font-editorial);
+      font-size: clamp(1.18rem, 2vw, 1.42rem);
+      font-weight: 700;
+      line-height: 1.42;
+      color: #211508;
+    }
+
+    .dossier-options {
+      margin-top: 1.15rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .resolution-btn {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      width: 100%;
+      padding: 0.9rem 1rem;
+      border-radius: 14px;
+      border: 1.5px solid rgba(124, 78, 18, 0.32);
+      background: rgba(255, 252, 245, 0.72);
+      color: #261b0e;
+      font-family: inherit;
+      font-size: 0.89rem;
+      font-weight: 500;
+      line-height: 1.48;
+      text-align: left;
+      cursor: pointer;
+      transition: transform 0.16s ease, border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .resolution-btn:hover:not(:disabled) {
+      transform: translateX(4px);
+      border-color: #9c6718;
+      background: #fffdf7;
+      box-shadow: 0 8px 18px rgba(107, 72, 20, 0.16);
+    }
+
+    .resolution-btn.is-approved {
+      border-color: #059669;
+      background: #ecfdf5;
+      color: #064e3b;
+      font-weight: 600;
+    }
+
+    .resolution-btn.is-rejected {
+      border-color: #dc2626;
+      background: #fef2f2;
+      color: #7f1d1d;
+    }
+
+    .resolution-letter {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      font-weight: 800;
+      background: rgba(156, 103, 24, 0.14);
+      color: #6b4310;
+    }
+
+    .resolution-btn.is-approved .resolution-letter {
+      background: #059669;
+      color: #fff;
+    }
+
+    .wax-seal-stamp {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 82px;
+      height: 82px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-family: var(--font-display);
+      font-size: 0.6rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #fef3c7;
+      background: radial-gradient(circle at 32% 30%, #10b981, #047857 62%, #064e3b 100%);
+      border: 3px double #a7f3d0;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+      transform: rotate(-14deg) scale(1);
+      pointer-events: none;
+    }
+
+    .wax-seal-stamp[hidden] {
+      display: none;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .wax-seal-stamp:not([hidden]) {
+        animation: stampSlam 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+    }
+
+    @keyframes stampSlam {
+      0% { opacity: 0; transform: rotate(-28deg) scale(2.1); }
+      75% { opacity: 1; transform: rotate(-12deg) scale(0.92); }
+      100% { opacity: 1; transform: rotate(-14deg) scale(1); }
+    }
+
+    /* ============================================================
+       PUZZLE 3: EL ASTROLABIO DEL MÉTODO & HIPÓTESIS FINAL
+       ============================================================ */
+    .method-arena {
+      margin-top: 1.35rem;
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      gap: 1.35rem;
+      align-items: start;
+    }
+
+    @media (max-width: 820px) {
+      .method-arena {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .method-pool-box,
+    .method-pipeline-box {
+      padding: 1.15rem;
+      border-radius: 20px;
+      background: rgba(8, 13, 20, 0.8);
+      border: 1px solid rgba(217, 167, 74, 0.24);
+    }
+
+    .method-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .method-card {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.88rem 1rem;
+      margin-bottom: 0.65rem;
+      border-radius: 14px;
+      border: 1px solid rgba(217, 167, 74, 0.32);
+      background: linear-gradient(145deg, rgba(22, 34, 48, 0.96), rgba(11, 18, 27, 0.98));
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.87rem;
+      font-weight: 500;
+      text-align: left;
+      cursor: grab;
+      transition: transform 0.16s ease, border-color 0.2s ease, opacity 0.2s ease;
+    }
+
+    .method-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .method-card:hover:not(:disabled) {
+      border-color: var(--brass-bright);
+      transform: translateY(-2px);
+    }
+
+    .method-card:disabled {
+      opacity: 0.35;
+      cursor: default;
+    }
+
+    .method-slot {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      width: 100%;
+      min-height: 60px;
+      padding: 0.75rem 0.95rem;
+      margin-bottom: 0.7rem;
+      border-radius: 14px;
+      border: 1.5px dashed rgba(217, 167, 74, 0.3);
+      background: rgba(6, 10, 16, 0.72);
+      color: var(--text-dim);
+      font-family: inherit;
+      font-size: 0.86rem;
+      text-align: left;
+      cursor: pointer;
+      transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .method-slot:last-child {
+      margin-bottom: 0;
+    }
+
+    .method-slot.drag-over {
+      border-style: solid;
+      border-color: var(--brass-bright);
+      background: rgba(217, 167, 74, 0.15);
+      box-shadow: 0 0 20px rgba(217, 167, 74, 0.25);
+    }
+
+    .method-slot.filled {
+      border-style: solid;
+      border-color: rgba(250, 226, 163, 0.55);
+      background: linear-gradient(135deg, rgba(217, 167, 74, 0.15), rgba(15, 24, 34, 0.9));
+      color: #fff8ea;
+    }
+
+    .method-slot.verified {
+      border-color: rgba(52, 211, 153, 0.65);
+      background: rgba(6, 78, 59, 0.38);
+      color: #d1fae5;
+    }
+
+    .slot-numeral {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      font-family: var(--font-display);
+      font-size: 0.76rem;
+      font-weight: 800;
+      background: rgba(217, 167, 74, 0.16);
+      color: var(--brass-bright);
+      border: 1px solid rgba(217, 167, 74, 0.4);
+    }
+
+    .method-slot.verified .slot-numeral {
+      background: var(--emerald);
+      color: #042f2e;
+      border-color: var(--emerald);
+    }
+
+    /* Act B: Hold-to-Validate Hypothesis Seal */
+    .hypothesis-chamber {
+      margin-top: 1.45rem;
+      padding: clamp(1.35rem, 3vw, 2rem);
+      border-radius: 22px;
+      border: 1px solid rgba(52, 211, 153, 0.48);
+      background:
+        radial-gradient(circle at 50% 0%, rgba(52, 211, 153, 0.18), transparent 65%),
+        rgba(7, 25, 22, 0.88);
+      text-align: center;
+    }
+
+    .hypothesis-chamber[hidden] {
+      display: none;
+    }
+
+    .hypothesis-quote {
+      margin: 0.9rem auto 0;
+      max-width: 64ch;
+      font-family: var(--font-editorial);
+      font-style: italic;
+      font-size: clamp(1.2rem, 2.2vw, 1.52rem);
+      line-height: 1.52;
+      color: #f3f9f6;
+    }
+
+    .hold-seal-wrap {
+      margin-top: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .hold-seal-btn {
+      position: relative;
+      width: 132px;
+      height: 132px;
+      border-radius: 50%;
+      border: none;
+      background: radial-gradient(circle at 38% 30%, #fae2a3, #c48c2d 62%, #6d4710 100%);
+      color: #1c1204;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.25rem;
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      box-shadow: 0 0 36px rgba(217, 167, 74, 0.42), inset 0 2px 4px rgba(255, 255, 255, 0.7);
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      transition: transform 0.15s ease, box-shadow 0.2s ease;
+    }
+
+    .hold-seal-btn.charging {
+      transform: scale(0.95);
+      box-shadow: 0 0 56px rgba(52, 211, 153, 0.75), 0 0 24px rgba(250, 226, 163, 0.9);
+    }
+
+    .hold-ring-svg {
+      position: absolute;
+      inset: -12px;
+      width: calc(100% + 24px);
+      height: calc(100% + 24px);
+      transform: rotate(-90deg);
+      pointer-events: none;
+    }
+
+    .hold-hint {
+      font-size: 0.8rem;
+      color: #a7f3d0;
+    }
+
+    /* ============================================================
+       SCENE 4: LA GRAN REVELACIÓN (THE GRAND FINALE)
+       ============================================================ */
+    .finale-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
+    }
+
+    .reveal-hero {
+      padding: clamp(1.6rem, 4vw, 2.8rem);
+      text-align: center;
+      border-color: rgba(250, 226, 163, 0.52);
+      background:
+        radial-gradient(ellipse 80% 55% at 50% 0%, rgba(217, 167, 74, 0.24), transparent 65%),
+        linear-gradient(170deg, rgba(20, 31, 44, 0.94), rgba(8, 13, 20, 0.97));
+    }
+
+    .reveal-name {
+      margin: 0.7rem 0 0;
+      font-family: var(--font-display);
+      font-size: clamp(1.9rem, 4.8vw, 3.4rem);
+      font-weight: 900;
+      line-height: 1.08;
+    }
+
+    .reveal-lead {
+      margin: 0.85rem auto 0;
+      max-width: 62ch;
+      font-family: var(--font-editorial);
+      font-size: clamp(1.18rem, 2.1vw, 1.44rem);
+      line-height: 1.5;
+      color: #ebe3d3;
+    }
+
+    /* Interactive 3D Foil Medallion */
+    .medallion-stage {
+      margin: 1.8rem auto;
+      perspective: 900px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .medallion-3d {
+      position: relative;
+      width: clamp(164px, 24vw, 204px);
+      height: clamp(164px, 24vw, 204px);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background:
+        radial-gradient(circle at 30% 25%, #fff6d6 0%, #e5b75a 38%, #a66f19 76%, #5e3b08 100%);
+      border: 4px solid #fff0c2;
+      box-shadow:
+        0 0 70px rgba(231, 190, 106, 0.48),
+        0 20px 44px rgba(0, 0, 0, 0.65),
+        inset 0 0 26px rgba(255, 252, 232, 0.65);
+      transform-style: preserve-3d;
+      transition: transform 0.14s ease-out;
+      overflow: hidden;
+    }
+
+    .medallion-3d::before {
+      content: "";
+      position: absolute;
+      inset: 9px;
+      border-radius: 50%;
+      border: 2px dashed rgba(68, 40, 6, 0.5);
+      pointer-events: none;
+    }
+
+    .medallion-sheen {
+      position: absolute;
+      inset: -20%;
+      background: linear-gradient(125deg, transparent 34%, rgba(255, 255, 255, 0.55) 48%, transparent 62%);
+      transform: translateX(-35%) rotate(15deg);
+      pointer-events: none;
+      transition: transform 0.18s ease-out;
+    }
+
+    .medallion-score {
+      position: relative;
+      font-family: var(--font-display);
+      font-size: clamp(3.9rem, 7vw, 5rem);
+      font-weight: 900;
+      line-height: 0.92;
+      color: #241604;
+      text-shadow: 0 1px 0 rgba(255, 248, 220, 0.85);
+    }
+
+    .medallion-word {
+      position: relative;
+      margin-top: 0.25rem;
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #3a2408;
+    }
+
+    /* 3 Subject Score Cards with Odometer Tumblers */
+    .grades-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.9rem;
+      text-align: left;
+    }
+
+    @media (max-width: 780px) {
+      .grades-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .grade-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.85rem;
+      padding: 1rem 1.1rem;
+      border-radius: 18px;
+      background: rgba(7, 12, 19, 0.78);
+      border: 1px solid rgba(250, 226, 163, 0.34);
+    }
+
+    .grade-status {
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--emerald);
+    }
+
+    .grade-subject {
+      margin: 0.25rem 0 0;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.35;
+    }
+
+    .grade-tumbler {
+      flex-shrink: 0;
+      min-width: 54px;
+      height: 54px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      font-weight: 900;
+      color: var(--brass-bright);
+      background: linear-gradient(180deg, rgba(217, 167, 74, 0.28), rgba(107, 72, 20, 0.24));
+      border: 1.5px solid rgba(250, 226, 163, 0.65);
+      box-shadow: 0 0 20px rgba(217, 167, 74, 0.24);
+    }
+
+    /* Interactive Wax-Sealed Farewell Envelope */
+    .envelope-section {
+      position: relative;
+      border-radius: 26px;
+      overflow: hidden;
+      background: linear-gradient(160deg, #faf2df 0%, #eedbb7 100%);
+      color: var(--ink-dark);
+      border: 2px solid #cfa14c;
+      box-shadow: 0 26px 60px rgba(0, 0, 0, 0.56);
+    }
+
+    .envelope-closed {
+      padding: clamp(1.8rem, 4vw, 2.8rem);
+      text-align: center;
+      background:
+        linear-gradient(155deg, transparent 49.4%, rgba(156, 103, 24, 0.22) 49.8%, transparent 50.6%),
+        linear-gradient(205deg, transparent 49.4%, rgba(156, 103, 24, 0.22) 49.8%, transparent 50.6%),
+        linear-gradient(170deg, #faf2df 0%, #ecdaB7 100%);
+    }
+
+    .envelope-closed[hidden],
+    .letter-open[hidden] {
+      display: none;
+    }
+
+    .envelope-wax-btn {
+      margin: 1.25rem auto 0;
+      width: 112px;
+      height: 112px;
+      border-radius: 50%;
+      border: 3px double rgba(254, 226, 226, 0.65);
+      background: radial-gradient(circle at 32% 28%, #dc2626 0%, #991b1b 60%, #5c0f0f 100%);
+      color: #fef2f2;
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.25rem;
+      box-shadow: 0 14px 32px rgba(127, 29, 29, 0.5), inset 0 2px 6px rgba(255, 255, 255, 0.3);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .envelope-wax-btn:hover {
+      transform: scale(1.07) rotate(-4deg);
+      box-shadow: 0 18px 40px rgba(153, 27, 27, 0.62);
+    }
+
+    .letter-open {
+      padding: clamp(1.5rem, 3.8vw, 2.75rem);
+      background:
+        radial-gradient(circle at 100% 0%, rgba(207, 161, 76, 0.18), transparent 45%),
+        linear-gradient(180deg, #fdfaf1 0%, #f4e6c9 100%);
+    }
+
+    .letter-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #7c4e12;
+    }
+
+    .letter-heading {
+      margin: 0.45rem 0 0;
+      font-family: var(--font-display);
+      font-size: clamp(1.35rem, 2.8vw, 1.95rem);
+      font-weight: 800;
+      color: #24180a;
+    }
+
+    .letter-body {
+      margin-top: 1rem;
+      font-family: var(--font-editorial);
+      font-size: clamp(1.16rem, 2vw, 1.34rem);
+      line-height: 1.68;
+      color: #362714;
+      white-space: pre-line;
+    }
+
+    .letter-signature {
+      margin: 1.35rem 0 0;
+      font-family: var(--font-editorial);
+      font-style: italic;
+      font-size: 1.38rem;
+      font-weight: 700;
+      color: #6b4310;
+    }
+
+    /* Diploma Showcase */
+    .diploma-panel {
+      padding: clamp(1.35rem, 3vw, 2.2rem);
+    }
+
+    .diploma-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .diploma-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+    }
+
+    .diploma-frame {
+      padding: 0.7rem;
+      border-radius: 20px;
+      border: 1px solid rgba(250, 226, 163, 0.35);
+      background: #060a10;
+      box-shadow: inset 0 0 28px rgba(0, 0, 0, 0.8);
+    }
+
+    #diploma-canvas {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 13px;
+    }
+
+    .finale-footer-bar {
+      margin-top: 1.35rem;
+      padding-top: 1.1rem;
+      border-top: 1px solid rgba(217, 167, 74, 0.2);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.85rem;
+    }
+
+    /* ============================================================
+       NATIVE MODAL DIALOG (MODO DOCENTE) — Modern Web Guidance
+       ============================================================ */
+    dialog.teacher-dialog {
+      max-width: 560px;
+      width: calc(100% - 2rem);
+      max-height: 90dvh;
+      padding: 0;
+      border: 1px solid rgba(250, 226, 163, 0.42);
+      border-radius: 24px;
+      background: linear-gradient(165deg, #131d29 0%, #0b121b 100%);
+      color: var(--text-primary);
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.8);
+      overflow: auto;
+    }
+
+    dialog.teacher-dialog[open] {
+      display: block;
+    }
+
+    dialog.teacher-dialog:modal {
+      overscroll-behavior: contain;
+    }
+
+    dialog.teacher-dialog::backdrop {
+      background: rgba(3, 6, 10, 0.78);
+      backdrop-filter: blur(6px);
+      overflow: hidden;
+      overscroll-behavior: contain;
+    }
+
+    .dialog-inner {
+      padding: 1.5rem;
+    }
+
+    .dialog-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(217, 167, 74, 0.2);
+    }
+
+    .dialog-close-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-block-size: 36px;
+      min-inline-size: 36px;
+      border-radius: 10px;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      background: rgba(15, 24, 34, 0.8);
+      color: var(--text-secondary);
+      cursor: pointer;
+    }
+
+    .dialog-close-btn:hover {
+      border-color: var(--brass-bright);
+      color: var(--brass-bright);
+    }
+
+    .dialog-form {
+      margin-top: 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.95rem;
+    }
+
+    .dialog-form label {
+      display: block;
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--brass-bright);
+      margin-bottom: 0.35rem;
+    }
+
+    .dialog-form textarea.brass-input {
+      resize: vertical;
+      min-height: 110px;
+      line-height: 1.5;
+    }
+
+    .dialog-teacher-tools {
+      padding: 0.85rem 1rem;
+      border-radius: 14px;
+      background: rgba(217, 167, 74, 0.08);
+      border: 1px solid rgba(217, 167, 74, 0.25);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.65rem;
+    }
+
+    .dialog-actions {
+      margin-top: 0.4rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.65rem;
+    }
+
+    /* Toast Stack */
+    .toast-stack {
+      position: fixed;
+      bottom: 1.1rem;
+      right: 1.1rem;
+      z-index: 70;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      max-width: 310px;
+      pointer-events: none;
+    }
+
+    .toast-item {
+      padding: 0.78rem 1rem;
+      border-radius: 14px;
+      border: 1px solid rgba(250, 226, 163, 0.42);
+      background: rgba(11, 18, 27, 0.94);
+      color: var(--text-primary);
+      font-size: 0.8rem;
+      font-weight: 600;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(10px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .toast-item.is-success {
+      border-color: rgba(52, 211, 153, 0.6);
+      background: rgba(6, 48, 38, 0.94);
+      color: #d1fae5;
+    }
+
+    /* Key Forged Celebration Native Dialog */
+    dialog.forge-dialog {
+      max-width: 450px;
+      width: calc(100% - 2rem);
+      padding: 0;
+      border: 1.5px solid rgba(250, 226, 163, 0.65);
+      border-radius: 26px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(250, 226, 163, 0.25), transparent 62%),
+        linear-gradient(165deg, #162230, #0b1119);
+      color: var(--text-primary);
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.78), 0 0 50px rgba(217, 167, 74, 0.25);
+      overflow: auto;
+    }
+
+    dialog.forge-dialog[open] {
+      display: block;
+    }
+
+    dialog.forge-dialog:modal {
+      overscroll-behavior: contain;
+    }
+
+    dialog.forge-dialog::backdrop {
+      background: rgba(4, 7, 11, 0.8);
+      backdrop-filter: blur(8px);
+      overflow: hidden;
+      overscroll-behavior: contain;
+    }
+
+    .forge-card {
+      padding: 2rem 1.75rem;
+      text-align: center;
+    }
+
+    .forge-key-medallion {
+      width: 92px;
+      height: 92px;
+      margin: 0 auto 1rem;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(circle at 35% 30%, #fff2c6, #d49e3d 65%, #7a5111 100%);
+      color: #1d1204;
+      box-shadow: 0 0 40px rgba(250, 226, 163, 0.55);
+    }
+
+    .dialog-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    @media (pointer: coarse) {
+      .hud-btn,
+      .btn-ghost,
+      .patch-node,
+      .resolution-btn,
+      .method-card,
+      .method-slot {
+        min-block-size: 44px;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .game-hud {
+        padding: max(0.65rem, env(safe-area-inset-top)) 0.7rem 0.65rem;
+        gap: 0.45rem;
+      }
+      .hud-brand {
+        padding: 0.38rem 0.7rem 0.38rem 0.42rem;
+        gap: 0.45rem;
+        min-width: 0;
+      }
+      .hud-brand-title {
+        font-size: 0.68rem;
+        letter-spacing: 0.05em;
+      }
+      .hud-brand-sub,
+      .hud-btn-label,
+      .hud-pill {
+        display: none;
+      }
+      .stage {
+        padding-top: 4.35rem;
+      }
+      .key-slot {
+        min-width: 100%;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .crest-showcase {
+        max-width: 240px;
+      }
+      .vault-door-frame {
+        width: min(310px, 80vw);
+      }
+      .wheel-label-pill {
+        font-size: 0.64rem;
+        padding: 0.28rem 0.6rem;
+      }
+      .wax-seal-stamp {
+        width: 64px;
+        height: 64px;
+        font-size: 0.52rem;
+        top: 0.75rem;
+        right: 0.75rem;
+      }
+      .dossier-stamp-corner {
+        max-width: calc(100% - 76px);
+      }
+      .dialog-grid-2 {
+        grid-template-columns: 1fr;
+      }
+      .diploma-actions,
+      .dialog-actions {
+        width: 100%;
+      }
+      .diploma-actions > button,
+      .dialog-actions > button {
+        flex: 1 1 auto;
+      }
+      .toast-stack {
+        left: 0.9rem;
+        right: 0.9rem;
+        max-width: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Atmospheric Ambient Particles & Light Rays -->
+  <canvas id="ambient-canvas" aria-hidden="true"></canvas>
+  <!-- Confetti & Spark Bursts Layer -->
+  <canvas id="fx-canvas" aria-hidden="true"></canvas>
+
+  <!-- Centralized Screen-Reader Live Region -->
+  <div id="sr-announcer" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Minimal Floating Game HUD -->
+  <header class="game-hud">
+    <div class="hud-group">
+      <div class="hud-brand">
+        <span class="hud-emblem" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="7.5" cy="15.5" r="5.5"></circle>
+            <path d="m21 2-9.6 9.6"></path>
+            <path d="m15.5 7.5 3 3L22 7l-3-3"></path>
+          </svg>
+        </span>
+        <span class="hud-brand-text">
+          <span class="hud-brand-title">LA BÓVEDA DE LAS 3 LLAVES</span>
+          <span id="hud-institution" class="hud-brand-sub">Carrera de Bibliotecología · Ciclo Lectivo 2026</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="hud-group">
+      <span id="hud-student-pill" class="hud-pill" hidden>
+        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+        <span id="hud-student-name"></span>
+      </span>
+
+      <button id="btn-motion-toggle" type="button" class="hud-btn" aria-label="Pausar animaciones ambientales">
+        <svg id="icon-motion" aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="6" y="4" width="4" height="16"></rect>
+          <rect x="14" y="4" width="4" height="16"></rect>
+        </svg>
+        <span id="label-motion" class="hud-btn-label">Pausar ambiente</span>
+      </button>
+
+      <button id="btn-sound-toggle" type="button" class="hud-btn" aria-label="Silenciar sonido">
+        <svg id="icon-sound-on" aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+        </svg>
+        <svg id="icon-sound-off" aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" hidden>
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <line x1="22" y1="9" x2="16" y2="15"></line>
+          <line x1="16" y1="9" x2="22" y2="15"></line>
+        </svg>
+        <span id="label-sound" class="hud-btn-label">Sonido</span>
+      </button>
+
+      <button id="btn-open-config" type="button" class="hud-btn">
+        <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="4" y1="21" x2="4" y2="14"></line>
+          <line x1="4" y1="10" x2="4" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12" y2="3"></line>
+          <line x1="20" y1="21" x2="20" y2="16"></line>
+          <line x1="20" y1="12" x2="20" y2="3"></line>
+          <line x1="2" y1="14" x2="6" y2="14"></line>
+          <line x1="10" y1="8" x2="14" y2="8"></line>
+          <line x1="18" y1="16" x2="22" y2="16"></line>
+        </svg>
+        <span class="hud-btn-label">Docente</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Toast Container -->
+  <div id="toast-stack" class="toast-stack"></div>
+
+  <!-- Key Forged Native Modal Dialog -->
+  <dialog id="forge-dialog" class="forge-dialog" aria-labelledby="forge-title">
+    <div class="forge-card">
+      <div class="forge-key-medallion" aria-hidden="true">
+        <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="7.5" cy="15.5" r="5.5"></circle>
+          <path d="m21 2-9.6 9.6"></path>
+          <path d="m15.5 7.5 3 3L22 7l-3-3"></path>
+        </svg>
+      </div>
+      <p id="forge-kicker" class="eyebrow-badge" style="margin:0 auto;">LLAVE FORJADA</p>
+      <h2 id="forge-title" class="font-display gold-text" style="margin:0.8rem 0 0.45rem;font-size:1.55rem;"></h2>
+      <p id="forge-desc" style="margin:0;color:var(--text-secondary);font-size:0.92rem;line-height:1.55;"></p>
+      <button id="btn-forge-continue" type="button" class="btn-brass" style="margin-top:1.35rem;width:100%;" autofocus>
+        Insertar llave en la Bóveda
+      </button>
+    </div>
+  </dialog>
+
+  <!-- Cinematic Vault Opening Doors -->
+  <div id="vault-cinematic" class="vault-cinematic" hidden aria-hidden="true">
+    <div class="cinematic-door cinematic-door-left"></div>
+    <div class="cinematic-door cinematic-door-right"></div>
+    <div class="cinematic-seam-light"></div>
+    <div class="cinematic-caption">BÓVEDA DESBLOQUEADA</div>
+  </div>
+
+  <main class="stage">
+    <!-- ============================================================
+         SCENE 1: EL UMBRAL (ENTRY)
+         ============================================================ -->
+    <section id="scene-welcome" class="scene">
+      <div class="threshold-grid">
+        <!-- Animated Mechanical Astrolabe Vault Emblem -->
+        <div class="crest-showcase">
+          <div class="crest-aura"></div>
+          <svg class="crest-svg float-gentle" viewBox="0 0 400 400" role="img" aria-label="Emblema mecánico dorado de La Bóveda de las 3 Llaves">
+            <defs>
+              <linearGradient id="g-brass-ring" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#fff0c1" />
+                <stop offset="38%" stop-color="#d9a74a" />
+                <stop offset="72%" stop-color="#8b5d19" />
+                <stop offset="100%" stop-color="#f7dc98" />
+              </linearGradient>
+              <radialGradient id="g-core-dark" cx="42%" cy="35%" r="65%">
+                <stop offset="0%" stop-color="#1e2d3e" />
+                <stop offset="62%" stop-color="#0b121b" />
+                <stop offset="100%" stop-color="#05080d" />
+              </radialGradient>
+              <radialGradient id="g-keyhole-glow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#fff4cc" />
+                <stop offset="55%" stop-color="#d9a74a" />
+                <stop offset="100%" stop-color="rgba(217,167,74,0)" />
+              </radialGradient>
+            </defs>
+
+            <!-- Outer Rotating Compass Ring -->
+            <g class="spin-slow" opacity="0.9">
+              <circle cx="200" cy="200" r="184" fill="none" stroke="url(#g-brass-ring)" stroke-width="2" stroke-dasharray="14 8" />
+              <circle cx="200" cy="200" r="168" fill="none" stroke="rgba(250,226,163,0.28)" stroke-width="1.2" />
+              <g stroke="#e4b761" stroke-width="2">
+                <line x1="200" y1="8" x2="200" y2="26" />
+                <line x1="200" y1="374" x2="200" y2="392" />
+                <line x1="8" y1="200" x2="26" y2="200" />
+                <line x1="374" y1="200" x2="392" y2="200" />
+                <line x1="64" y1="64" x2="77" y2="77" />
+                <line x1="323" y1="323" x2="336" y2="336" />
+                <line x1="336" y1="64" x2="323" y2="77" />
+                <line x1="77" y1="323" x2="64" y2="336" />
+              </g>
+            </g>
+
+            <!-- Inner Reverse Gear Ring -->
+            <g class="spin-reverse" opacity="0.82">
+              <circle cx="200" cy="200" r="144" fill="none" stroke="url(#g-brass-ring)" stroke-width="6" stroke-dasharray="10 14" />
+              <circle cx="200" cy="200" r="132" fill="none" stroke="rgba(52,211,153,0.34)" stroke-width="1.5" stroke-dasharray="4 6" />
+            </g>
+
+            <!-- Main Vault Shield -->
+            <circle cx="200" cy="200" r="118" fill="url(#g-core-dark)" stroke="url(#g-brass-ring)" stroke-width="7" />
+            <circle cx="200" cy="200" r="102" fill="none" stroke="rgba(250,226,163,0.3)" stroke-width="1.5" />
+
+            <!-- Three Orbital Lock Nodes -->
+            <g>
+              <circle cx="110" cy="148" r="17" fill="#0d1722" stroke="#38bdf8" stroke-width="2.5" />
+              <text x="110" y="153" text-anchor="middle" fill="#bae6fd" font-family="Cinzel, Georgia, serif" font-size="13" font-weight="700">I</text>
+              <circle cx="290" cy="148" r="17" fill="#0d1722" stroke="#f59e0b" stroke-width="2.5" />
+              <text x="290" y="153" text-anchor="middle" fill="#fde68a" font-family="Cinzel, Georgia, serif" font-size="13" font-weight="700">II</text>
+              <circle cx="200" cy="304" r="17" fill="#0d1722" stroke="#34d399" stroke-width="2.5" />
+              <text x="200" y="309" text-anchor="middle" fill="#a7f3d0" font-family="Cinzel, Georgia, serif" font-size="13" font-weight="700">III</text>
+            </g>
+
+            <!-- Glowing Center Keyhole -->
+            <circle cx="200" cy="200" r="56" fill="url(#g-keyhole-glow)" opacity="0.28" />
+            <circle cx="200" cy="200" r="42" fill="#0c131d" stroke="url(#g-brass-ring)" stroke-width="3.5" />
+            <circle cx="200" cy="191" r="12" fill="url(#g-brass-ring)" />
+            <path d="M193 198 L207 198 L212 225 L188 225 Z" fill="url(#g-brass-ring)" />
+          </svg>
+        </div>
+
+        <!-- Threshold Narrative & Credential Entry -->
+        <div>
+          <span class="eyebrow-badge">
+            <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="m12 3 1.9 5.8L20 11l-6.1 2.2L12 19l-1.9-5.8L4 11l6.1-2.2z"></path>
+            </svg>
+            Escape Room de Cierre · Bibliotecología 2026
+          </span>
+
+          <h1 id="heading-welcome" class="threshold-title gold-text" tabindex="-1">
+            La Bóveda de las 3 Llaves
+          </h1>
+
+          <p class="threshold-lead">
+            En la cámara reservada del archivo descansan las calificaciones finales de este ciclo.
+            Tres mecanismos —uno por cada cátedra que compartimos— protegen su apertura.
+            Activá los dispositivos, forjá las tres llaves y girá el volante para revelar tu cierre.
+          </p>
+
+          <form id="form-start" class="credential-card" novalidate>
+            <div class="credential-header">
+              <span class="credential-label-tag">Credencial de Acceso al Archivo</span>
+              <span id="credential-live-preview" class="credential-preview-name">Sin inscribir</span>
+            </div>
+
+            <div class="input-wrap">
+              <label for="input-student-name">Nombre y apellido del estudiante</label>
+              <span id="student-name-hint" class="input-hint">Se grabará en tu credencial de cámara y en tu constancia de despedida.</span>
+              <input
+                id="input-student-name"
+                type="text"
+                maxlength="60"
+                autocomplete="name"
+                required
+                aria-describedby="student-name-hint welcome-error"
+                placeholder="Ej.: Sofía Martínez"
+                class="brass-input"
+              />
+              <p id="welcome-error" class="error-msg" hidden>Ingresá tu nombre y apellido para habilitar la credencial de la bóveda.</p>
+            </div>
+
+            <div class="threshold-actions">
+              <button type="submit" class="btn-brass" style="flex:1;">
+                <span>Cruzar el Umbral</span>
+                <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
+          </form>
+
+          <div class="subject-mini-strip" aria-label="Cátedras de la misión">
+            <span class="subject-chip"><span class="dot" style="background:#38bdf8;"></span>Tecnologías de procesos y servicios</span>
+            <span class="subject-chip"><span class="dot" style="background:#f59e0b;"></span>Políticas de Información y Comunicación</span>
+            <span class="subject-chip"><span class="dot" style="background:#34d399;"></span>Metodología de Investigación</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SCENE 2: LA CÁMARA CENTRAL (THE MECHANICAL VAULT HUB)
+         ============================================================ -->
+    <section id="scene-chamber" class="scene" hidden>
+      <div class="chamber-layout">
+        <div class="chamber-header">
+          <span class="eyebrow-badge">Cámara Central · <span id="chamber-progress-label">0 de 3 candados destrabados</span></span>
+          <h1 id="heading-chamber" class="chamber-title" tabindex="-1">
+            Bienvenida/o a la cámara, <span id="chamber-student-name" class="gold-text"></span>
+          </h1>
+          <p id="chamber-subtitle" class="chamber-subtitle">
+            Seleccioná cualquiera de los tres mecanismos conectados a la bóveda para destrabar su cerrojo y forjar su llave.
+          </p>
+        </div>
+
+        <!-- Arena: Left Lock | Giant Mechanical Vault | Right & Bottom Locks -->
+        <div class="vault-arena">
+          <div class="vault-side-col">
+            <!-- Lock 1 -->
+            <button id="station-lock-1" type="button" class="lock-station">
+              <div class="lock-station-top">
+                <span class="lock-sigil" aria-hidden="true">
+                  <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+                    <rect x="9" y="9" width="6" height="6"></rect>
+                    <path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"></path>
+                  </svg>
+                </span>
+                <span id="state-lock-1" class="lock-state-tag">Cerrojo activo</span>
+              </div>
+              <span class="lock-kicker">Candado I · Tablero de Metadatos</span>
+              <h2 class="lock-name">Tecnologías de procesos y servicios en bibliotecas</h2>
+              <p class="lock-desc">Cableá los 3 módulos del servidor bibliotecario para restaurar la interoperabilidad.</p>
+              <span id="cta-lock-1" class="lock-cta">Inspeccionar tablero →</span>
+            </button>
+
+            <!-- Lock 3 (Placed here on desktop for balanced triangle flanking) -->
+            <button id="station-lock-3" type="button" class="lock-station">
+              <div class="lock-station-top">
+                <span class="lock-sigil" aria-hidden="true">
+                  <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+                  </svg>
+                </span>
+                <span id="state-lock-3" class="lock-state-tag">Cerrojo activo</span>
+              </div>
+              <span class="lock-kicker">Candado III · Astrolabio del Método</span>
+              <h2 class="lock-name">Metodología de Investigación en Unidades de Información</h2>
+              <p class="lock-desc">Alineá las 4 etapas investigativas y cargá el sello de la hipótesis final.</p>
+              <span id="cta-lock-3" class="lock-cta">Alinear astrolabio →</span>
+            </button>
+          </div>
+
+          <!-- Center Interactive Vault Door -->
+          <div class="vault-center-col">
+            <div id="vault-door-frame" class="vault-door-frame">
+              <div class="vault-door-glow"></div>
+              <svg class="vault-svg" viewBox="0 0 400 400" aria-hidden="true">
+                <defs>
+                  <linearGradient id="v-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#fff0c1" />
+                    <stop offset="45%" stop-color="#d49e3d" />
+                    <stop offset="100%" stop-color="#7c5215" />
+                  </linearGradient>
+                  <linearGradient id="v-steel" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#223041" />
+                    <stop offset="50%" stop-color="#0f1722" />
+                    <stop offset="100%" stop-color="#080d14" />
+                  </linearGradient>
+                  <radialGradient id="v-inner" cx="50%" cy="42%" r="60%">
+                    <stop offset="0%" stop-color="#1d2b3b" />
+                    <stop offset="70%" stop-color="#0c131d" />
+                    <stop offset="100%" stop-color="#060a0f" />
+                  </radialGradient>
+                </defs>
+
+                <!-- Outer Vault Frame & Rivets -->
+                <circle cx="200" cy="200" r="186" fill="url(#v-steel)" stroke="url(#v-gold)" stroke-width="5" />
+                <circle cx="200" cy="200" r="168" fill="none" stroke="rgba(250,226,163,0.22)" stroke-width="2" stroke-dasharray="4 10" />
+
+                <!-- 3 Energy Conduits (light up as keys are inserted) -->
+                <path id="conduit-1" class="vault-conduit" d="M 78 128 L 154 174" stroke="#38bdf8" stroke-width="4" stroke-linecap="round" fill="none" />
+                <path id="conduit-2" class="vault-conduit" d="M 322 128 L 246 174" stroke="#f59e0b" stroke-width="4" stroke-linecap="round" fill="none" />
+                <path id="conduit-3" class="vault-conduit" d="M 200 340 L 200 256" stroke="#34d399" stroke-width="4" stroke-linecap="round" fill="none" />
+
+                <!-- 3 Heavy Mechanical Bolts -->
+                <g id="bolt-1" class="vault-bolt vault-bolt-1">
+                  <rect x="44" y="108" width="54" height="26" rx="6" transform="rotate(30 71 121)" fill="url(#v-gold)" stroke="#2d1d06" stroke-width="2" />
+                  <circle cx="66" cy="118" r="5" fill="#171005" />
+                </g>
+                <g id="bolt-2" class="vault-bolt vault-bolt-2">
+                  <rect x="302" y="108" width="54" height="26" rx="6" transform="rotate(-30 329 121)" fill="url(#v-gold)" stroke="#2d1d06" stroke-width="2" />
+                  <circle cx="334" cy="118" r="5" fill="#171005" />
+                </g>
+                <g id="bolt-3" class="vault-bolt vault-bolt-3">
+                  <rect x="187" y="318" width="26" height="54" rx="6" fill="url(#v-gold)" stroke="#2d1d06" stroke-width="2" />
+                  <circle cx="200" cy="350" r="5" fill="#171005" />
+                </g>
+
+                <!-- Inner Chamber Door Plate -->
+                <circle cx="200" cy="200" r="134" fill="url(#v-inner)" stroke="url(#v-gold)" stroke-width="7" />
+
+                <!-- Decorative Turning Gear inside door -->
+                <g class="spin-slow" opacity="0.45">
+                  <circle cx="200" cy="200" r="112" fill="none" stroke="url(#v-gold)" stroke-width="8" stroke-dasharray="10 12" />
+                </g>
+
+                <!-- 3 Keyhole Indicator Gems on the Door -->
+                <g>
+                  <circle id="gem-1" cx="144" cy="168" r="10" fill="#1e293b" stroke="#64748b" stroke-width="2" />
+                  <circle id="gem-2" cx="256" cy="168" r="10" fill="#1e293b" stroke="#64748b" stroke-width="2" />
+                  <circle id="gem-3" cx="200" cy="264" r="10" fill="#1e293b" stroke="#64748b" stroke-width="2" />
+                </g>
+
+                <!-- Central 6-Spoke Vault Wheel -->
+                <g class="vault-wheel-group">
+                  <circle cx="200" cy="200" r="72" fill="none" stroke="url(#v-gold)" stroke-width="11" />
+                  <circle cx="200" cy="200" r="61" fill="none" stroke="rgba(255,244,210,0.35)" stroke-width="1.5" />
+                  <g stroke="url(#v-gold)" stroke-width="8" stroke-linecap="round">
+                    <line x1="200" y1="128" x2="200" y2="272" />
+                    <line x1="138" y1="164" x2="262" y2="236" />
+                    <line x1="262" y1="164" x2="138" y2="236" />
+                  </g>
+                  <circle cx="200" cy="200" r="24" fill="#141e29" stroke="url(#v-gold)" stroke-width="5" />
+                  <circle cx="200" cy="200" r="9" fill="url(#v-gold)" />
+                </g>
+              </svg>
+
+              <!-- Interactive Central Wheel Trigger -->
+              <button id="btn-turn-wheel" type="button" class="wheel-trigger-btn" disabled aria-label="Volante de la Bóveda: necesita las 3 llaves">
+                <span id="wheel-label" class="wheel-label-pill">Bloqueada (0/3)</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="vault-side-col">
+            <!-- Lock 2 -->
+            <button id="station-lock-2" type="button" class="lock-station">
+              <div class="lock-station-top">
+                <span class="lock-sigil" aria-hidden="true">
+                  <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path>
+                    <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path>
+                    <path d="M7 21h10"></path>
+                    <path d="M12 3v18"></path>
+                    <path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"></path>
+                  </svg>
+                </span>
+                <span id="state-lock-2" class="lock-state-tag">Cerrojo activo</span>
+              </div>
+              <span class="lock-kicker">Candado II · Balanza del Archivo</span>
+              <h2 class="lock-name">Políticas de Información y Comunicación</h2>
+              <p class="lock-desc">Resolvé 2 expedientes éticos de acceso ciudadano y alfabetización mediática.</p>
+              <span id="cta-lock-2" class="lock-cta">Abrir expedientes →</span>
+            </button>
+
+            <!-- Status / Next Hint Panel -->
+            <div id="chamber-status-card" class="vault-panel" style="padding:1.15rem 1.2rem;border-radius:20px;">
+              <span class="lock-kicker" id="vault-panel-kicker">Estado del Mecanismo</span>
+              <h2 id="vault-panel-title" class="lock-name" style="margin-top:0.35rem;">Faltan 3 llaves para abrir</h2>
+              <p id="vault-panel-desc" class="lock-desc" style="margin-top:0.35rem;">
+                Cada candado destrabado retrae un cerrojo de bronce. Al liberar los tres, girá el volante central para descubrir tu sorpresa final.
+              </p>
+              <button id="btn-open-vault-cta" type="button" class="btn-brass" style="margin-top:0.9rem;width:100%;" disabled>
+                Girar Volante y Abrir Bóveda
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Velvet Key Inventory Tray -->
+        <div class="key-tray" aria-label="Inventario de llaves forjadas">
+          <div id="tray-key-1" class="key-slot">
+            <span class="key-icon-wrap" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>
+            </span>
+            <span class="key-slot-meta">
+              <span class="key-slot-title">Llave I</span>
+              <span id="tray-sub-1" class="key-slot-sub">Interoperabilidad · Pendiente</span>
+            </span>
+          </div>
+
+          <div id="tray-key-2" class="key-slot">
+            <span class="key-icon-wrap" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>
+            </span>
+            <span class="key-slot-meta">
+              <span class="key-slot-title">Llave II</span>
+              <span id="tray-sub-2" class="key-slot-sub">Acceso Ético · Pendiente</span>
+            </span>
+          </div>
+
+          <div id="tray-key-3" class="key-slot">
+            <span class="key-icon-wrap" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>
+            </span>
+            <span class="key-slot-meta">
+              <span class="key-slot-title">Llave III</span>
+              <span id="tray-sub-3" class="key-slot-sub">Conocimiento · Pendiente</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SCENE 3A: PUZZLE 1 — TABLERO DE METADATOS (INTERACTIVE PATCHBAY)
+         ============================================================ -->
+    <section id="scene-puzzle-1" class="scene" hidden>
+      <div class="vault-panel puzzle-shell">
+        <div class="puzzle-topbar">
+          <button type="button" class="btn-ghost btn-back-chamber">
+            ← Volver a la Cámara
+          </button>
+          <span class="puzzle-badge">Candado I · Tecnologías de procesos y servicios</span>
+        </div>
+
+        <h1 id="heading-p1" class="puzzle-heading" tabindex="-1">El Tablero de Enrutamiento Bibliotecario</h1>
+        <p class="puzzle-story">
+          Un corte en la consola central desconectó el flujo de metadatos y servicios antes del cierre de ciclo.
+          <strong style="color:var(--brass-bright);">Arrastrá un cable desde cada conector izquierdo hasta su terminal derecha</strong> (o tocá un origen y luego su destino) para restablecer los 3 circuitos.
+        </p>
+
+        <div class="patchbay-console">
+          <div class="telemetry-strip">
+            <div class="telemetry-status">
+              <span id="p1-led" class="telemetry-dot"></span>
+              <span id="p1-telemetry-text">SEÑAL DE RED: 0/3 ENLACES ACTIVOS · SISTEMA INTERRUMPIDO</span>
+            </div>
+            <div class="telemetry-meter">
+              <div class="telemetry-bar-track">
+                <div id="p1-meter-fill" class="telemetry-bar-fill"></div>
+              </div>
+              <span id="p1-meter-pct" style="font-family:monospace;font-size:0.78rem;color:#bae6fd;">0%</span>
+            </div>
+          </div>
+
+          <div id="patchbay-board" class="patchbay-board">
+            <svg id="patchbay-wires" class="patchbay-wire-layer" aria-hidden="true"></svg>
+
+            <div class="patchbay-col">
+              <div class="patchbay-col-label">1. Módulos emisores</div>
+              <div id="p1-left-list" class="patchbay-col"></div>
+            </div>
+
+            <div class="patchbay-spacer" aria-hidden="true"></div>
+
+            <div class="patchbay-col">
+              <div class="patchbay-col-label">2. Terminales de servicio en la biblioteca</div>
+              <div id="p1-right-list" class="patchbay-col"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="p1-feedback" class="puzzle-feedback" hidden></div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SCENE 3B: PUZZLE 2 — LA BALANZA DEL ARCHIVO (ETHICS DOSSIER)
+         ============================================================ -->
+    <section id="scene-puzzle-2" class="scene" hidden>
+      <div class="vault-panel puzzle-shell">
+        <div class="puzzle-topbar">
+          <button type="button" class="btn-ghost btn-back-chamber">
+            ← Volver a la Cámara
+          </button>
+          <span id="p2-step-badge" class="puzzle-badge">Candado II · Expediente 1 de 2</span>
+        </div>
+
+        <h1 id="heading-p2" class="puzzle-heading" tabindex="-1">La Balanza del Acceso Ético</h1>
+        <p class="puzzle-story">
+          Dos expedientes urgentes esperan tu firma como profesional de la información.
+          Elegí la resolución que equilibre la <strong style="color:var(--brass-bright);">Balanza Democrática del Archivo</strong> para sellar el dictamen.
+        </p>
+
+        <div class="ethics-layout">
+          <!-- Animated Brass Balance Scale -->
+          <div class="scale-chamber">
+            <svg class="scale-svg" viewBox="0 0 240 210" role="img" aria-label="Balanza de bronce que refleja el equilibrio ético de tus decisiones">
+              <defs>
+                <linearGradient id="sc-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#fff0c1" />
+                  <stop offset="50%" stop-color="#d49e3d" />
+                  <stop offset="100%" stop-color="#7c5215" />
+                </linearGradient>
+              </defs>
+              <!-- Pillar & Base -->
+              <rect x="115" y="42" width="10" height="132" rx="4" fill="url(#sc-gold)" />
+              <path d="M74 186 Q120 168 166 186 L176 196 L64 196 Z" fill="url(#sc-gold)" />
+              <circle cx="120" cy="40" r="9" fill="#fae2a3" stroke="#6b4814" stroke-width="2" />
+
+              <!-- Tilting Beam -->
+              <g id="scale-beam" class="scale-beam" style="transform: rotate(-10deg);">
+                <line x1="34" y1="66" x2="206" y2="66" stroke="url(#sc-gold)" stroke-width="6" stroke-linecap="round" />
+                <circle cx="120" cy="66" r="7" fill="#0d1520" stroke="#fae2a3" stroke-width="2.5" />
+                <!-- Left Pan -->
+                <line x1="46" y1="68" x2="28" y2="122" stroke="#d9a74a" stroke-width="1.6" />
+                <line x1="46" y1="68" x2="64" y2="122" stroke="#d9a74a" stroke-width="1.6" />
+                <path d="M20 122 Q46 142 72 122 Z" fill="url(#sc-gold)" />
+                <!-- Right Pan -->
+                <line x1="194" y1="68" x2="176" y2="122" stroke="#d9a74a" stroke-width="1.6" />
+                <line x1="194" y1="68" x2="212" y2="122" stroke="#d9a74a" stroke-width="1.6" />
+                <path d="M168 122 Q194 142 220 122 Z" fill="url(#sc-gold)" />
+              </g>
+            </svg>
+            <div id="scale-status-title" class="scale-meter-caption">Balanza en tensión</div>
+            <p id="scale-status-desc" class="scale-meter-sub">
+              Emití resoluciones basadas en equidad, acceso libre y alfabetización mediática para nivelar la balanza.
+            </p>
+          </div>
+
+          <!-- Parchment Dossier -->
+          <div class="dossier-card">
+            <span class="dossier-stamp-corner">Expediente Prioritario · Políticas IC</span>
+            <div id="p2-wax-stamp" class="wax-seal-stamp" hidden>SELLADO</div>
+            <p id="p2-tag" class="dossier-tag"></p>
+            <h2 id="p2-question" class="dossier-question"></h2>
+            <div id="p2-options" class="dossier-options"></div>
+          </div>
+        </div>
+
+        <div id="p2-feedback" class="puzzle-feedback" hidden></div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SCENE 3C: PUZZLE 3 — EL ASTROLABIO DEL MÉTODO & HIPÓTESIS FINAL
+         ============================================================ -->
+    <section id="scene-puzzle-3" class="scene" hidden>
+      <div class="vault-panel puzzle-shell">
+        <div class="puzzle-topbar">
+          <button type="button" class="btn-ghost btn-back-chamber">
+            ← Volver a la Cámara
+          </button>
+          <span class="puzzle-badge">Candado III · Metodología de Investigación</span>
+        </div>
+
+        <h1 id="heading-p3" class="puzzle-heading" tabindex="-1">El Astrolabio del Método</h1>
+        <p class="puzzle-story">
+          Para liberar el tercer cerrojo, ensamblá las <strong style="color:var(--brass-bright);">4 etapas del proceso de investigación</strong> en orden lógico.
+          Podés <strong style="color:var(--brass-bright);">arrastrar las placas</strong> hacia los ranurados numerados o simplemente hacer clic en cada etapa para ubicarla.
+        </p>
+
+        <div id="p3-part-a" class="method-arena">
+          <div class="method-pool-box">
+            <div class="method-header-row">
+              <span class="lock-kicker">Placas Metodológicas Disponibles</span>
+            </div>
+            <div id="p3-pool"></div>
+          </div>
+
+          <div class="method-pipeline-box">
+            <div class="method-header-row">
+              <span class="lock-kicker" style="color:var(--brass-bright);">Secuencia del Astrolabio (I → IV)</span>
+              <button id="btn-p3-reset" type="button" class="btn-ghost" style="min-block-size:32px;padding:0.25rem 0.7rem;font-size:0.74rem;">
+                Reiniciar orden
+              </button>
+            </div>
+            <div id="p3-slots"></div>
+          </div>
+        </div>
+
+        <div id="p3-feedback" class="puzzle-feedback" hidden></div>
+
+        <!-- Act B: Hold-to-Validate Final Hypothesis -->
+        <div id="p3-part-b" class="hypothesis-chamber" hidden>
+          <span class="eyebrow-badge" style="border-color:rgba(52,211,153,0.5);background:rgba(52,211,153,0.16);color:#a7f3d0;">
+            ✓ Secuencia Metodológica Alineada · Paso Final
+          </span>
+          <h2 class="font-display" style="margin:0.8rem 0 0;font-size:1.55rem;color:#fff;">
+            Hipótesis Final del Ciclo Lectivo
+          </h2>
+          <p class="hypothesis-quote">
+            «El trabajo compuesto, crítico y comprometido realizado a lo largo de este año confirma la enorme potencia con la que ya enriquecen y transforman sus unidades de información.»
+          </p>
+
+          <div class="hold-seal-wrap">
+            <button id="btn-hold-validate" type="button" class="hold-seal-btn" aria-describedby="hold-seal-hint">
+              <svg class="hold-ring-svg" viewBox="0 0 156 156" aria-hidden="true">
+                <circle cx="78" cy="78" r="71" fill="none" stroke="rgba(250,226,163,0.22)" stroke-width="6" />
+                <circle id="hold-progress-circle" cx="78" cy="78" r="71" fill="none" stroke="#34d399" stroke-width="7" stroke-linecap="round" stroke-dasharray="446.1" stroke-dashoffset="446.1" />
+              </svg>
+              <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <path d="m9 12 2 2 4-4"></path>
+              </svg>
+              <span id="hold-seal-label">Mantené</span>
+            </button>
+            <span id="hold-seal-hint" class="hold-hint">
+              Mantené presionado el sello (o la barra espaciadora) para validar la hipótesis y forjar la 3.ª llave.
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SCENE 4: LA GRAN REVELACIÓN & DIPLOMA
+         ============================================================ -->
+    <section id="scene-finale" class="scene" hidden>
+      <div class="finale-stack">
+        <!-- Reveal Hero -->
+        <div class="vault-panel reveal-hero">
+          <span class="eyebrow-badge">
+            ★ Bóveda Abierta · Calificación Final Confirmada
+          </span>
+
+          <h1 id="heading-finale" class="reveal-name gold-text" tabindex="-1">
+            ¡Felicitaciones, <span id="finale-student-name"></span>!
+          </h1>
+
+          <p class="reveal-lead">
+            Porque detrás de cada entrega hubo pensamiento crítico, sensibilidad profesional y un
+            <strong style="color:var(--brass-bright);">trabajo compuesto sobresaliente</strong>, la nota final en las tres cátedras es:
+          </p>
+
+          <!-- Interactive 3D Tilting Gold Foil Medallion -->
+          <div class="medallion-stage">
+            <div id="medallion-3d" class="medallion-3d">
+              <div id="medallion-sheen" class="medallion-sheen"></div>
+              <span id="medallion-score" class="medallion-score">10</span>
+              <span class="medallion-word">Sobresaliente</span>
+            </div>
+          </div>
+
+          <!-- 3 Subjects with Tumbler Reveal -->
+          <div class="grades-grid">
+            <article class="grade-card">
+              <div>
+                <span class="grade-status">Aprobada · Llave I</span>
+                <h2 class="grade-subject">Tecnologías de procesos y servicios en bibliotecas</h2>
+              </div>
+              <span id="tumbler-1" class="grade-tumbler">00</span>
+            </article>
+
+            <article class="grade-card">
+              <div>
+                <span class="grade-status">Aprobada · Llave II</span>
+                <h2 class="grade-subject">Políticas de Información y Comunicación</h2>
+              </div>
+              <span id="tumbler-2" class="grade-tumbler">00</span>
+            </article>
+
+            <article class="grade-card">
+              <div>
+                <span class="grade-status">Aprobada · Llave III</span>
+                <h2 class="grade-subject">Metodología de Investigación en Unidades de Información</h2>
+              </div>
+              <span id="tumbler-3" class="grade-tumbler">00</span>
+            </article>
+          </div>
+        </div>
+
+        <!-- Interactive Wax-Sealed Farewell Letter -->
+        <div class="envelope-section">
+          <div id="envelope-closed" class="envelope-closed">
+            <span class="letter-kicker">Correspondencia Reservada · Sello de Cátedra</span>
+            <h2 class="letter-heading">Hay una carta de despedida esperándote adentro</h2>
+            <p style="margin:0.5rem auto 0;max-width:48ch;color:var(--ink-muted);font-size:0.95rem;">
+              Tocá el sello de lacre carmesí para abrir el sobre y leer el mensaje final de tu docente.
+            </p>
+            <button id="btn-open-envelope" type="button" class="envelope-wax-btn">
+              <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
+                <line x1="16" y1="8" x2="2" y2="22"></line>
+                <line x1="17.5" y1="15" x2="9" y2="15"></line>
+              </svg>
+              <span>Abrir sobre</span>
+            </button>
+          </div>
+
+          <div id="letter-open" class="letter-open" hidden>
+            <span class="letter-kicker">Carta de Despedida · De Colega a Colega</span>
+            <h2 id="letter-heading" class="letter-heading" tabindex="-1">Gracias por este capítulo inolvidable, colega</h2>
+            <div id="finale-letter-body" class="letter-body"></div>
+            <p id="finale-letter-signature" class="letter-signature"></p>
+          </div>
+        </div>
+
+        <!-- High-Res Downloadable Diploma -->
+        <div class="vault-panel diploma-panel">
+          <div class="diploma-header">
+            <div>
+              <span class="lock-kicker">Constancia Simbólica Descargable · Alta Definición</span>
+              <h2 class="font-display" style="margin:0.3rem 0 0;font-size:1.45rem;color:#fff;">
+                Tu Diploma de Honor y Despedida
+              </h2>
+            </div>
+            <div class="diploma-actions">
+              <button id="btn-download-diploma" type="button" class="btn-brass">
+                <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                <span>Descargar Diploma (PNG)</span>
+              </button>
+              <button id="btn-celebrate-again" type="button" class="btn-ghost">
+                ✦ ¡Más confeti!
+              </button>
+            </div>
+          </div>
+
+          <div class="diploma-frame">
+            <canvas id="diploma-canvas" width="1800" height="1272" aria-label="Vista previa del Diploma de Honor personalizado"></canvas>
+          </div>
+
+          <div class="finale-footer-bar">
+            <p style="margin:0;font-size:0.82rem;color:var(--text-dim);">
+              ¿Lo están jugando en clase o en grupo? Reiniciá la bóveda para que otro estudiante viva el recorrido y descargue su propio diploma.
+            </p>
+            <button id="btn-restart-all" type="button" class="btn-ghost">
+              ↺ Cambiar estudiante / Jugar de nuevo
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Native Modal Dialog: Modo Docente -->
+  <dialog id="modal-config" class="teacher-dialog" closedby="any" aria-labelledby="config-dialog-title">
+    <div class="dialog-inner">
+      <div class="dialog-head">
+        <div>
+          <span class="lock-kicker">Modo Docente · Personalización</span>
+          <h2 id="config-dialog-title" class="font-display" style="margin:0.25rem 0 0;font-size:1.3rem;color:#fff;">
+            Configurar Carta y Diploma
+          </h2>
+        </div>
+        <button id="btn-close-config" type="button" class="dialog-close-btn" aria-label="Cerrar configuración docente">
+          ✕
+        </button>
+      </div>
+
+      <form id="form-config" class="dialog-form">
+        <div>
+          <label for="cfg-institution">Institución / Encabezado del diploma</label>
+          <input id="cfg-institution" type="text" class="brass-input" autofocus />
+        </div>
+
+        <div class="dialog-grid-2">
+          <div>
+            <label for="cfg-date">Fecha en la constancia</label>
+            <input id="cfg-date" type="text" class="brass-input" />
+          </div>
+          <div>
+            <label for="cfg-signature">Firma docente</label>
+            <input id="cfg-signature" type="text" class="brass-input" />
+          </div>
+        </div>
+
+        <div>
+          <label for="cfg-message">Mensaje de despedida</label>
+          <textarea id="cfg-message" class="brass-input" rows="5"></textarea>
+        </div>
+
+        <div class="dialog-teacher-tools">
+          <div style="font-size:0.78rem;color:var(--text-secondary);max-width:300px;line-height:1.4;">
+            <strong style="color:var(--brass-bright);">Atajos de clase:</strong> copiá un enlace con tu carta ya cargada o previsualizá la apertura final.
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:0.45rem;">
+            <button id="btn-copy-share-link" type="button" class="btn-ghost" style="min-block-size:36px;font-size:0.76rem;padding:0.35rem 0.75rem;">
+              Copiar enlace docente
+            </button>
+            <button id="btn-preview-finale" type="button" class="btn-ghost" style="min-block-size:36px;font-size:0.76rem;padding:0.35rem 0.75rem;">
+              Vista previa final
+            </button>
+          </div>
+        </div>
+
+        <div class="dialog-actions">
+          <button id="btn-reset-config" type="button" class="btn-ghost">
+            Restaurar original
+          </button>
+          <button type="submit" class="btn-brass">
+            Guardar cambios
+          </button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <script>
+    (function () {
+      'use strict';
+
+      /* ============================================================
+         CONFIG & CONTENT DATA
+         ============================================================ */
+      const DEFAULTS = {
+        institution: 'Carrera de Bibliotecología · Ciclo Lectivo 2026',
+        dateText: 'Noviembre de 2026',
+        signature: 'Con enorme gratitud y admiración, tu docente de cátedra',
+        message:
+          'Si tuviéramos que catalogar este año compartido, ninguna norma alcanzaría para describir todo lo que pasó en el aula: faltarían descriptores para el entusiasmo con el que llegaron a cada encuentro, la predisposición para debatir, crear y sostenerse en equipo, y esa participación genuina que transformó cada clase en una conversación viva.\n\nUstedes ya habitan y hacen latir las bibliotecas todos los días; por eso fue un privilegio enorme acompañarlos en Tecnologías, Políticas de Información y Metodología. Construyeron un trabajo compuesto riguroso, sensible y lúcido. Ese 10 no es un cierre simbólico: es la prueba fiel de la pasión y el oficio que ponen en cada proyecto.\n\nAunque hoy cerremos este tomo en el aula, me llevo el orgullo inmenso de haber compartido el camino con colegas tan generosos y comprometidos. Que nunca se apague la curiosidad y que cada unidad de información siga brillando con su impronta. ¡Gracias por tanto y hasta cada cruce de pasillos, colegas!'
+      };
+
+      const STORAGE_KEY = 'boveda_3_llaves_premium_cfg_v3';
+
+      const P1_LEFT = [
+        { id: 'meta', code: 'MOD-01 · METADATOS', label: 'Estándares de metadatos (MARC 21 / Dublin Core)' },
+        { id: 'opac', code: 'MOD-02 · DESCUBRIMIENTO', label: 'OPAC y capa de descubrimiento' },
+        { id: 'circ', code: 'MOD-03 · SERVICIOS', label: 'Automatización de circulación y servicios' }
+      ];
+
+      const P1_RIGHT = [
+        { id: 'circ', code: 'TERM-A · FLUJO DE USO', label: 'Agiliza préstamos, reservas, renovaciones y métricas de uso en tiempo real.' },
+        { id: 'meta', code: 'TERM-B · INTEROPERABILIDAD', label: 'Garantiza la descripción normalizada y el intercambio entre catálogos.' },
+        { id: 'opac', code: 'TERM-C · AUTONOMÍA USUARIA', label: 'Permite buscar, filtrar y acceder al acervo físico y digital con autonomía.' }
+      ];
+
+      const P2_SCENARIOS = [
+        {
+          tag: 'Expediente 01 · Derecho de acceso a la información',
+          question:
+            'Ante un ajuste presupuestario, se propone restringir el acceso público gratuito a las computadoras y bases de datos de la biblioteca. ¿Qué decisión responde a una política de información democrática?',
+          options: [
+            {
+              letter: 'A',
+              text: 'Arancelar el acceso digital para cubrir gastos operativos y limitar el uso a socios pagos.',
+              correct: false,
+              tilt: -18,
+              hint: 'La balanza se inclina en contra de la equidad: arancelar servicios esenciales profundiza la brecha digital. Pensá en el rol inclusivo de la biblioteca.'
+            },
+            {
+              letter: 'B',
+              text: 'Defender el acceso libre, equitativo y gratuito como derecho ciudadano, articulando alianzas y redes cooperativas para sostener el servicio.',
+              correct: true,
+              tilt: -4,
+              hint: '¡Resolución ejemplar! Las políticas de información defienden la equidad y la inclusión digital como pilares democráticos.'
+            },
+            {
+              letter: 'C',
+              text: 'Cerrar temporalmente la sala informática hasta que cambie el presupuesto del próximo ciclo.',
+              correct: false,
+              tilt: 16,
+              hint: 'Suspender el acceso desbalancea el servicio y deja sin recursos a quienes más dependen de la unidad de información.'
+            }
+          ]
+        },
+        {
+          tag: 'Expediente 02 · Comunicación y Alfabetización Mediática (AMI)',
+          question:
+            'Circula en redes locales una campaña de desinformación que confunde a la comunidad. ¿Cuál es la estrategia comunicacional más potente desde la biblioteca?',
+          options: [
+            {
+              letter: 'A',
+              text: 'Mantenerse al margen del tema para evitar involucrarse en debates actuales.',
+              correct: false,
+              tilt: -15,
+              hint: 'La neutralidad profesional no significa silencio frente a la desinformación: la biblioteca forma ciudadanía crítica.'
+            },
+            {
+              letter: 'B',
+              text: 'Publicar únicamente un listado técnico de normas bibliográficas sin contextualizar.',
+              correct: false,
+              tilt: 14,
+              hint: 'Comunicar con impacto requiere traducir el rigor técnico a un lenguaje cercano, claro y útil para la comunidad.'
+            },
+            {
+              letter: 'C',
+              text: 'Impulsar acciones de Alfabetización Mediática e Informacional (AMI) con curaduría abierta, verificación de fuentes y diálogo cercano.',
+              correct: true,
+              tilt: 0,
+              hint: '¡Equilibrio perfecto! Curaduría crítica, lenguaje accesible y acompañamiento activo: la Llave del Acceso Ético es tuya.'
+            }
+          ]
+        }
+      ];
+
+      const P3_STAGES_CORRECT = [
+        { id: 's1', numeral: 'I', label: 'Formulación del problema y pregunta de investigación' },
+        { id: 's2', numeral: 'II', label: 'Revisión de antecedentes y marco teórico' },
+        { id: 's3', numeral: 'III', label: 'Trabajo de campo, recolección y análisis de datos' },
+        { id: 's4', numeral: 'IV', label: 'Interpretación de hallazgos y transferencia a la unidad de información' }
+      ];
+
+      const P3_STAGES_SHUFFLED = [
+        P3_STAGES_CORRECT[2],
+        P3_STAGES_CORRECT[0],
+        P3_STAGES_CORRECT[3],
+        P3_STAGES_CORRECT[1]
+      ];
+
+      const KEY_META = {
+        1: {
+          kicker: 'LLAVE I FORJADA',
+          title: 'Llave de la Interoperabilidad',
+          desc: 'Los tres módulos del sistema bibliotecario vuelven a latir en sincronía. El primer cerrojo de la bóveda está listo para retraerse.'
+        },
+        2: {
+          kicker: 'LLAVE II FORJADA',
+          title: 'Llave del Acceso Ético',
+          desc: 'La Balanza del Archivo alcanzó su equilibrio democrático. El segundo cerrojo de bronce cede ante tu criterio profesional.'
+        },
+        3: {
+          kicker: 'LLAVE III FORJADA',
+          title: 'Llave del Conocimiento',
+          desc: 'El Astrolabio del Método confirmó la hipótesis final del año. El tercer y último cerrojo de la bóveda queda liberado.'
+        }
+      };
+
+      const SCENE_TITLES = {
+        welcome: 'La Bóveda de las 3 Llaves · Cierre de Bibliotecología 2026',
+        chamber: 'Cámara Central · La Bóveda de las 3 Llaves',
+        'puzzle-1': 'Candado I: Tecnologías · La Bóveda de las 3 Llaves',
+        'puzzle-2': 'Candado II: Políticas de Información · La Bóveda de las 3 Llaves',
+        'puzzle-3': 'Candado III: Metodología · La Bóveda de las 3 Llaves',
+        finale: '¡Bóveda Abierta! Calificación 10 · La Bóveda de las 3 Llaves'
+      };
+
+      /* ============================================================
+         APPLICATION STATE
+         ============================================================ */
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      const state = {
+        studentName: '',
+        muted: false,
+        motionPaused: prefersReducedMotion,
+        currentScene: 'welcome',
+        keys: { 1: false, 2: false, 3: false },
+        animatedKeys: { 1: false, 2: false, 3: false },
+        pendingBoltKey: null,
+        envelopeOpen: false,
+        config: { ...DEFAULTS },
+        p1: {
+          selectedLeft: null,
+          matched: {},
+          draggingFrom: null,
+          dragPointer: null
+        },
+        p2: {
+          step: 0,
+          solvedSteps: [false, false],
+          tilt: -10
+        },
+        p3: {
+          slots: [null, null, null, null],
+          partASolved: false,
+          dragStageId: null
+        }
+      };
+
+      /* ============================================================
+         PROCEDURAL WEB AUDIO ENGINE (100% OFFLINE MECHANICAL & MUSICAL SFX)
+         ============================================================ */
+      let audioCtx = null;
+
+      function getAudioCtx() {
+        if (state.muted) return null;
+        try {
+          if (!audioCtx) {
+            const Ctx = window.AudioContext || window.webkitAudioContext;
+            if (Ctx) audioCtx = new Ctx();
+          }
+          if (audioCtx && audioCtx.state === 'suspended') {
+            audioCtx.resume();
+          }
+          return audioCtx;
+        } catch {
+          return null;
+        }
+      }
+
+      function playTone(freq, duration, type = 'sine', volume = 0.08, delay = 0, endFreq = null) {
+        const ctx = getAudioCtx();
+        if (!ctx) return;
+        const start = ctx.currentTime + delay;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, start);
+        if (endFreq !== null) {
+          osc.frequency.exponentialRampToValueAtTime(Math.max(20, endFreq), start + duration);
+        }
+        gain.gain.setValueAtTime(0.0001, start);
+        gain.gain.exponentialRampToValueAtTime(volume, start + 0.018);
+        gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(start);
+        osc.stop(start + duration + 0.03);
+      }
+
+      function sfxMechanicalClick() {
+        playTone(620, 0.055, 'triangle', 0.06, 0, 340);
+        playTone(1240, 0.03, 'sine', 0.03, 0.01);
+      }
+
+      function sfxPlugConnect() {
+        playTone(392, 0.12, 'triangle', 0.07, 0, 587);
+        playTone(784, 0.18, 'sine', 0.07, 0.06);
+      }
+
+      function sfxErrorClunk() {
+        playTone(195, 0.15, 'sawtooth', 0.045, 0, 140);
+        playTone(150, 0.2, 'triangle', 0.05, 0.09, 110);
+      }
+
+      function sfxStampThud() {
+        playTone(140, 0.18, 'sine', 0.14, 0, 52);
+        playTone(523.25, 0.22, 'triangle', 0.07, 0.06);
+        playTone(659.25, 0.25, 'sine', 0.07, 0.13);
+      }
+
+      function sfxKeyForged() {
+        const notes = [523.25, 659.25, 783.99, 1046.5];
+        notes.forEach((n, idx) => {
+          playTone(n, 0.42, idx % 2 === 0 ? 'triangle' : 'sine', 0.085, idx * 0.09);
+        });
+      }
+
+      function sfxBoltRetract() {
+        playTone(180, 0.25, 'sawtooth', 0.05, 0, 95);
+        playTone(440, 0.14, 'triangle', 0.06, 0.16, 660);
+      }
+
+      function sfxWheelTurnAndOpen() {
+        // Ratchet clicks
+        for (let i = 0; i < 6; i++) {
+          playTone(260 + i * 38, 0.06, 'triangle', 0.055, i * 0.11, 180);
+        }
+        // Deep mechanical rumble
+        playTone(95, 0.9, 'sawtooth', 0.06, 0.65, 58);
+        // Radiant orchestral chime chord
+        const chord = [392.0, 493.88, 587.33, 783.99, 987.77, 1174.66, 1567.98];
+        chord.forEach((n, idx) => {
+          playTone(n, 0.95, idx % 2 === 0 ? 'triangle' : 'sine', 0.075, 1.05 + idx * 0.085);
+        });
+      }
+
+      function sfxPaperUnfold() {
+        playTone(320, 0.14, 'sine', 0.05, 0, 520);
+        playTone(660, 0.24, 'triangle', 0.06, 0.09, 880);
+      }
+
+      /* ============================================================
+         AMBIENT ATMOSPHERIC CANVAS & FX CONFETTI/SPARK ENGINE
+         ============================================================ */
+      const ambientCanvas = document.getElementById('ambient-canvas');
+      const ambientCtx = ambientCanvas.getContext('2d');
+      const fxCanvas = document.getElementById('fx-canvas');
+      const fxCtx = fxCanvas.getContext('2d');
+
+      let vw = window.innerWidth;
+      let vh = window.innerHeight;
+      let dustParticles = [];
+      let fxParticles = [];
+      let pointerX = vw * 0.5;
+      let pointerY = vh * 0.45;
+
+      function resizeCanvases() {
+        vw = window.innerWidth;
+        vh = window.innerHeight;
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        ambientCanvas.width = Math.floor(vw * dpr);
+        ambientCanvas.height = Math.floor(vh * dpr);
+        ambientCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        fxCanvas.width = Math.floor(vw * dpr);
+        fxCanvas.height = Math.floor(vh * dpr);
+        fxCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        if (dustParticles.length === 0) {
+          const count = Math.min(54, Math.max(24, Math.floor((vw * vh) / 28000)));
+          for (let i = 0; i < count; i++) {
+            dustParticles.push({
+              x: Math.random() * vw,
+              y: Math.random() * vh,
+              r: 0.9 + Math.random() * 2.1,
+              vx: (Math.random() - 0.5) * 0.22,
+              vy: -0.14 - Math.random() * 0.28,
+              alpha: 0.18 + Math.random() * 0.45,
+              phase: Math.random() * Math.PI * 2,
+              hue: Math.random() > 0.22 ? 'gold' : 'emerald'
+            });
+          }
+        }
+        if (state.currentScene === 'puzzle-1') {
+          drawPatchbayWires();
+        }
+      }
+
+      function spawnSparks(x, y, count = 24, palette = ['#fae2a3', '#d9a74a', '#34d399', '#38bdf8']) {
+        if (state.motionPaused) return;
+        for (let i = 0; i < count; i++) {
+          const angle = Math.random() * Math.PI * 2;
+          const speed = 1.8 + Math.random() * 5.6;
+          fxParticles.push({
+            kind: 'spark',
+            x,
+            y,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed - 1.2,
+            gravity: 0.11,
+            size: 2 + Math.random() * 3.2,
+            life: 1,
+            decay: 0.02 + Math.random() * 0.02,
+            color: palette[Math.floor(Math.random() * palette.length)]
+          });
+        }
+      }
+
+      function fireConfettiGrand() {
+        if (state.motionPaused) return;
+        const palette = ['#fae2a3', '#d9a74a', '#34d399', '#ffffff', '#f59e0b', '#38bdf8'];
+        const origins = [
+          { x: vw * 0.5, y: vh * 0.42, spread: Math.PI * 2, count: 95 },
+          { x: vw * 0.12, y: vh * 0.68, spread: 1.1, baseAngle: -1.1, count: 55 },
+          { x: vw * 0.88, y: vh * 0.68, spread: 1.1, baseAngle: -2.04, count: 55 }
+        ];
+        origins.forEach((orig, idx) => {
+          setTimeout(() => {
+            for (let i = 0; i < orig.count; i++) {
+              const angle = orig.baseAngle !== undefined
+                ? orig.baseAngle + (Math.random() - 0.5) * orig.spread
+                : Math.random() * Math.PI * 2;
+              const speed = 4 + Math.random() * 9.5;
+              fxParticles.push({
+                kind: 'confetti',
+                x: orig.x,
+                y: orig.y,
+                vx: Math.cos(angle) * speed,
+                vy: Math.sin(angle) * speed - (orig.baseAngle ? 2.5 : 3.2),
+                gravity: 0.16,
+                drag: 0.985,
+                w: 6 + Math.random() * 6,
+                h: 4 + Math.random() * 4,
+                rot: Math.random() * Math.PI * 2,
+                vrot: (Math.random() - 0.5) * 0.24,
+                life: 1,
+                decay: 0.0055 + Math.random() * 0.005,
+                color: palette[Math.floor(Math.random() * palette.length)]
+              });
+            }
+          }, idx * 210);
+        });
+      }
+
+      function renderAmbientFrame(time) {
+        ambientCtx.clearRect(0, 0, vw, vh);
+        if (!state.motionPaused) {
+          // Subtle diagonal golden light beam
+          const rayGrad = ambientCtx.createLinearGradient(vw * 0.15, 0, vw * 0.65, vh * 0.85);
+          rayGrad.addColorStop(0, 'rgba(250, 226, 163, 0.055)');
+          rayGrad.addColorStop(0.5, 'rgba(217, 167, 74, 0.02)');
+          rayGrad.addColorStop(1, 'rgba(217, 167, 74, 0)');
+          ambientCtx.fillStyle = rayGrad;
+          ambientCtx.beginPath();
+          ambientCtx.moveTo(vw * 0.1, 0);
+          ambientCtx.lineTo(vw * 0.44, 0);
+          ambientCtx.lineTo(vw * 0.78, vh);
+          ambientCtx.lineTo(vw * 0.34, vh);
+          ambientCtx.closePath();
+          ambientCtx.fill();
+
+          // Floating golden dust motes
+          const pxOffset = ((pointerX / vw) - 0.5) * 16;
+          const pyOffset = ((pointerY / vh) - 0.5) * 16;
+          for (const p of dustParticles) {
+            p.x += p.vx;
+            p.y += p.vy;
+            if (p.y < -12) { p.y = vh + 12; p.x = Math.random() * vw; }
+            if (p.x < -12) p.x = vw + 12;
+            if (p.x > vw + 12) p.x = -12;
+            const twinkle = 0.65 + 0.35 * Math.sin(time * 0.0018 + p.phase);
+            ambientCtx.beginPath();
+            ambientCtx.arc(p.x + pxOffset * (p.r * 0.35), p.y + pyOffset * (p.r * 0.35), p.r, 0, Math.PI * 2);
+            ambientCtx.fillStyle = p.hue === 'gold'
+              ? `rgba(250, 226, 163, ${(p.alpha * twinkle).toFixed(3)})`
+              : `rgba(52, 211, 153, ${(p.alpha * 0.65 * twinkle).toFixed(3)})`;
+            ambientCtx.fill();
+          }
+        }
+
+        // FX Layer (sparks & confetti)
+        fxCtx.clearRect(0, 0, vw, vh);
+        if (fxParticles.length > 0) {
+          for (let i = fxParticles.length - 1; i >= 0; i--) {
+            const f = fxParticles[i];
+            f.vy += f.gravity;
+            if (f.drag) {
+              f.vx *= f.drag;
+              f.vy *= f.drag;
+            }
+            f.x += f.vx;
+            f.y += f.vy;
+            f.life -= f.decay;
+            if (f.life <= 0 || f.y > vh + 40) {
+              fxParticles.splice(i, 1);
+              continue;
+            }
+            fxCtx.save();
+            fxCtx.globalAlpha = Math.max(0, Math.min(1, f.life));
+            if (f.kind === 'spark') {
+              fxCtx.fillStyle = f.color;
+              fxCtx.beginPath();
+              fxCtx.arc(f.x, f.y, f.size, 0, Math.PI * 2);
+              fxCtx.fill();
+            } else {
+              f.rot += f.vrot;
+              fxCtx.translate(f.x, f.y);
+              fxCtx.rotate(f.rot);
+              fxCtx.fillStyle = f.color;
+              fxCtx.fillRect(-f.w / 2, -f.h / 2, f.w, f.h);
+            }
+            fxCtx.restore();
+          }
+        }
+
+        requestAnimationFrame(renderAmbientFrame);
+      }
+
+      /* ============================================================
+         HELPERS: ANNOUNCE, TOAST, PERSISTENCE & VIEW TRANSITIONS
+         ============================================================ */
+      function announce(msg) {
+        const el = document.getElementById('sr-announcer');
+        el.textContent = '';
+        setTimeout(() => { el.textContent = msg; }, 40);
+      }
+
+      function showToast(message, isSuccess = false) {
+        const stack = document.getElementById('toast-stack');
+        const el = document.createElement('div');
+        el.className = 'toast-item' + (isSuccess ? ' is-success' : '');
+        el.textContent = message;
+        stack.appendChild(el);
+        announce(message);
+        setTimeout(() => {
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(8px)';
+          setTimeout(() => el.remove(), 320);
+        }, 3200);
+      }
+
+      function loadConfig() {
+        // 1. Check URL hash (#cfg=...) for teacher-shared personalized links
+        try {
+          if (window.location.hash && window.location.hash.startsWith('#cfg=')) {
+            const b64 = decodeURIComponent(window.location.hash.slice(5));
+            const jsonStr = decodeURIComponent(escape(atob(b64)));
+            const parsed = JSON.parse(jsonStr);
+            state.config = {
+              institution: parsed.institution || DEFAULTS.institution,
+              dateText: parsed.dateText || DEFAULTS.dateText,
+              signature: parsed.signature || DEFAULTS.signature,
+              message: parsed.message || DEFAULTS.message
+            };
+            return;
+          }
+        } catch {
+          // Fallback to localStorage
+        }
+
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (raw) {
+            const parsed = JSON.parse(raw);
+            state.config = {
+              institution: parsed.institution || DEFAULTS.institution,
+              dateText: parsed.dateText || DEFAULTS.dateText,
+              signature: parsed.signature || DEFAULTS.signature,
+              message: parsed.message || DEFAULTS.message
+            };
+          }
+        } catch {
+          state.config = { ...DEFAULTS };
+        }
+      }
+
+      function saveConfig() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state.config));
+        } catch {
+          // Ignore storage errors
+        }
+      }
+
+      function syncMotionUI() {
+        document.body.classList.toggle('motion-paused', state.motionPaused);
+        const btn = document.getElementById('btn-motion-toggle');
+        const label = document.getElementById('label-motion');
+        const icon = document.getElementById('icon-motion');
+        if (state.motionPaused) {
+          label.textContent = 'Activar ambiente';
+          btn.setAttribute('aria-label', 'Activar animaciones ambientales');
+          icon.innerHTML = '<polygon points="6 4 20 12 6 20 6 4"></polygon>';
+        } else {
+          label.textContent = 'Pausar ambiente';
+          btn.setAttribute('aria-label', 'Pausar animaciones ambientales');
+          icon.innerHTML = '<rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect>';
+        }
+      }
+
+      const SCENE_IDS = ['welcome', 'chamber', 'puzzle-1', 'puzzle-2', 'puzzle-3', 'finale'];
+      const SCENE_HEADINGS = {
+        welcome: 'heading-welcome',
+        chamber: 'heading-chamber',
+        'puzzle-1': 'heading-p1',
+        'puzzle-2': 'heading-p2',
+        'puzzle-3': 'heading-p3',
+        finale: 'heading-finale'
+      };
+
+      function showScene(targetName) {
+        const updateDOM = () => {
+          state.currentScene = targetName;
+          SCENE_IDS.forEach((id) => {
+            const el = document.getElementById('scene-' + id);
+            if (el) el.hidden = id !== targetName;
+          });
+          document.title = SCENE_TITLES[targetName] || SCENE_TITLES.welcome;
+          window.scrollTo({ top: 0, behavior: state.motionPaused ? 'auto' : 'smooth' });
+        };
+
+        const focusHeading = () => {
+          const h = document.getElementById(SCENE_HEADINGS[targetName]);
+          if (h) h.focus({ preventScroll: true });
+          if (targetName === 'puzzle-1') {
+            requestAnimationFrame(() => drawPatchbayWires());
+          }
+        };
+
+        if (!document.startViewTransition || state.motionPaused) {
+          updateDOM();
+          focusHeading();
+          return;
+        }
+
+        const transition = document.startViewTransition(() => updateDOM());
+        transition.finished.finally(() => focusHeading());
+      }
+
+      /* ============================================================
+         SCENE 2: RENDER MECHANICAL VAULT CHAMBER
+         ============================================================ */
+      function renderChamber() {
+        const count = [1, 2, 3].filter((k) => state.keys[k]).length;
+        document.getElementById('chamber-student-name').textContent = state.studentName;
+        document.getElementById('hud-student-name').textContent = state.studentName;
+        document.getElementById('hud-student-pill').hidden = false;
+        document.getElementById('chamber-progress-label').textContent = `${count} de 3 candados destrabados`;
+
+        const gemColors = { 1: '#38bdf8', 2: '#f59e0b', 3: '#34d399' };
+        const trayNames = { 1: 'Interoperabilidad', 2: 'Acceso Ético', 3: 'Conocimiento' };
+        const defaultCtas = {
+          1: 'Inspeccionar tablero →',
+          2: 'Abrir expedientes →',
+          3: 'Alinear astrolabio →'
+        };
+
+        [1, 2, 3].forEach((k) => {
+          const unlocked = state.keys[k];
+          const station = document.getElementById(`station-lock-${k}`);
+          const badge = document.getElementById(`state-lock-${k}`);
+          const cta = document.getElementById(`cta-lock-${k}`);
+          const bolt = document.getElementById(`bolt-${k}`);
+          const conduit = document.getElementById(`conduit-${k}`);
+          const gem = document.getElementById(`gem-${k}`);
+          const tray = document.getElementById(`tray-key-${k}`);
+          const traySub = document.getElementById(`tray-sub-${k}`);
+
+          station.classList.toggle('is-unlocked', unlocked);
+          const showRetractedNow = unlocked && state.pendingBoltKey !== k;
+          bolt.classList.toggle('retracted', showRetractedNow);
+          conduit.classList.toggle('lit', showRetractedNow);
+          tray.classList.toggle('forged', unlocked);
+
+          if (unlocked) {
+            badge.textContent = '✓ Llave insertada';
+            cta.textContent = 'Cerrojo liberado · Ver de nuevo';
+            gem.setAttribute('fill', gemColors[k]);
+            gem.setAttribute('stroke', '#fff7d6');
+            traySub.textContent = `${trayNames[k]} · Forjada ✓`;
+          } else {
+            badge.textContent = 'Cerrojo activo';
+            cta.textContent = defaultCtas[k];
+            gem.setAttribute('fill', '#1e293b');
+            gem.setAttribute('stroke', '#64748b');
+            traySub.textContent = `${trayNames[k]} · Pendiente`;
+          }
+        });
+
+        const frame = document.getElementById('vault-door-frame');
+        const wheelBtn = document.getElementById('btn-turn-wheel');
+        const wheelLabel = document.getElementById('wheel-label');
+        const ctaBtn = document.getElementById('btn-open-vault-cta');
+        const panelKicker = document.getElementById('vault-panel-kicker');
+        const panelTitle = document.getElementById('vault-panel-title');
+        const panelDesc = document.getElementById('vault-panel-desc');
+
+        if (count === 3) {
+          frame.classList.add('all-unlocked');
+          wheelBtn.disabled = false;
+          wheelBtn.setAttribute('aria-label', 'Girar volante para abrir la Bóveda Final');
+          wheelLabel.textContent = '¡GIRAR VOLANTE!';
+          ctaBtn.disabled = false;
+          panelKicker.textContent = 'Mecanismo Listo';
+          panelKicker.style.color = 'var(--emerald)';
+          panelTitle.textContent = '¡Los 3 cerrojos están liberados!';
+          panelDesc.textContent = 'Girá el volante central de la bóveda para abrir las compuertas y descubrir tus notas finales y tu carta de despedida.';
+          document.getElementById('chamber-subtitle').textContent =
+            '¡Todas las llaves están en su lugar! Tocá el volante dorado de la bóveda para abrirla.';
+        } else {
+          frame.classList.remove('all-unlocked');
+          wheelBtn.disabled = true;
+          wheelBtn.setAttribute('aria-label', `Volante de la Bóveda: faltan ${3 - count} llaves`);
+          wheelLabel.textContent = `Bloqueada (${count}/3)`;
+          ctaBtn.disabled = true;
+          panelKicker.textContent = 'Estado del Mecanismo';
+          panelKicker.style.color = 'var(--brass)';
+          panelTitle.textContent = count === 2 ? 'Falta solo 1 llave' : `Faltan ${3 - count} llaves para abrir`;
+          panelDesc.textContent =
+            'Cada candado destrabado retrae un cerrojo de bronce. Al liberar los tres, girá el volante central para descubrir tu sorpresa final.';
+          document.getElementById('chamber-subtitle').textContent =
+            'Seleccioná cualquiera de los tres mecanismos conectados a la bóveda para destrabar su cerrojo y forjar su llave.';
+        }
+      }
+
+      function showKeyForgedModal(keyNum) {
+        const meta = KEY_META[keyNum];
+        state.pendingBoltKey = state.animatedKeys[keyNum] ? null : keyNum;
+        document.getElementById('forge-kicker').textContent = meta.kicker;
+        document.getElementById('forge-title').textContent = meta.title;
+        document.getElementById('forge-desc').textContent = meta.desc;
+        const dlg = document.getElementById('forge-dialog');
+        if (!dlg.open) dlg.showModal();
+        sfxKeyForged();
+        spawnSparks(vw * 0.5, vh * 0.45, 36);
+      }
+
+      /* ============================================================
+         PUZZLE 1: INTERACTIVE PATCHBAY WITH LIVE SVG CABLES
+         ============================================================ */
+      function drawPatchbayWires() {
+        const svg = document.getElementById('patchbay-wires');
+        const board = document.getElementById('patchbay-board');
+        if (!svg || !board || board.offsetWidth === 0) return;
+
+        const bRect = board.getBoundingClientRect();
+        svg.setAttribute('viewBox', `0 0 ${bRect.width} ${bRect.height}`);
+        let html = `
+          <defs>
+            <linearGradient id="wire-ok" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#38bdf8" />
+              <stop offset="50%" stop-color="#fae2a3" />
+              <stop offset="100%" stop-color="#34d399" />
+            </linearGradient>
+            <linearGradient id="wire-live" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#7dd3fc" />
+              <stop offset="100%" stop-color="#fae2a3" />
+            </linearGradient>
+          </defs>
+        `;
+
+        // Connected permanent wires
+        Object.keys(state.p1.matched).forEach((id) => {
+          const leftJack = board.querySelector(`[data-p1-left="${id}"] .jack-socket`);
+          const rightJack = board.querySelector(`[data-p1-right="${id}"] .jack-socket`);
+          if (!leftJack || !rightJack) return;
+          const lr = leftJack.getBoundingClientRect();
+          const rr = rightJack.getBoundingClientRect();
+          const x1 = lr.left + lr.width / 2 - bRect.left;
+          const y1 = lr.top + lr.height / 2 - bRect.top;
+          const x2 = rr.left + rr.width / 2 - bRect.left;
+          const y2 = rr.top + rr.height / 2 - bRect.top;
+          const cp = Math.max(48, Math.abs(x2 - x1) * 0.45);
+          const d = `M ${x1} ${y1} C ${x1 + cp} ${y1}, ${x2 - cp} ${y2}, ${x2} ${y2}`;
+          html += `
+            <path d="${d}" fill="none" stroke="rgba(52,211,153,0.28)" stroke-width="11" stroke-linecap="round" />
+            <path d="${d}" fill="none" stroke="url(#wire-ok)" stroke-width="4" stroke-linecap="round" />
+          `;
+        });
+
+        // Live dragged wire
+        if (state.p1.draggingFrom && state.p1.dragPointer) {
+          const leftJack = board.querySelector(`[data-p1-left="${state.p1.draggingFrom}"] .jack-socket`);
+          if (leftJack) {
+            const lr = leftJack.getBoundingClientRect();
+            const x1 = lr.left + lr.width / 2 - bRect.left;
+            const y1 = lr.top + lr.height / 2 - bRect.top;
+            const x2 = state.p1.dragPointer.x - bRect.left;
+            const y2 = state.p1.dragPointer.y - bRect.top;
+            const cp = Math.max(42, Math.abs(x2 - x1) * 0.45);
+            const d = `M ${x1} ${y1} C ${x1 + cp} ${y1}, ${x2 - cp} ${y2}, ${x2} ${y2}`;
+            html += `
+              <path d="${d}" fill="none" stroke="url(#wire-live)" stroke-width="4" stroke-dasharray="8 6" stroke-linecap="round" />
+              <circle cx="${x2}" cy="${y2}" r="6" fill="#fae2a3" />
+            `;
+          }
+        }
+
+        svg.innerHTML = html;
+      }
+
+      function attemptP1Match(leftId, rightId, targetBtn) {
+        const fb = document.getElementById('p1-feedback');
+        if (!leftId) {
+          sfxMechanicalClick();
+          fb.className = 'puzzle-feedback is-hint';
+          fb.textContent = 'Primero elegí un módulo emisor de la columna izquierda (o arrastrá desde él).';
+          fb.hidden = false;
+          return;
+        }
+
+        if (leftId === rightId) {
+          state.p1.matched[leftId] = true;
+          state.p1.selectedLeft = null;
+          const total = Object.keys(state.p1.matched).length;
+          if (targetBtn) {
+            const rect = targetBtn.getBoundingClientRect();
+            spawnSparks(rect.left + 20, rect.top + rect.height / 2, 22, ['#38bdf8', '#34d399', '#fae2a3']);
+          }
+
+          renderPuzzle1();
+
+          if (total === 3) {
+            state.keys[1] = true;
+            fb.className = 'puzzle-feedback is-success';
+            fb.innerHTML = '<span><strong>¡Interoperabilidad 100% restaurada!</strong> Todos los enlaces del sistema bibliotecario están activos.</span>';
+            fb.hidden = false;
+            setTimeout(() => showKeyForgedModal(1), 420);
+          } else {
+            sfxPlugConnect();
+            fb.className = 'puzzle-feedback is-success';
+            fb.textContent = `¡Circuito conectado con éxito! (${total}/3 enlaces restablecidos).`;
+            fb.hidden = false;
+          }
+        } else {
+          sfxErrorClunk();
+          if (targetBtn) {
+            targetBtn.classList.add('is-wrong');
+            setTimeout(() => targetBtn.classList.remove('is-wrong'), 450);
+          }
+          fb.className = 'puzzle-feedback is-error';
+          fb.textContent = 'Cortocircuito de enlace: ese módulo cumple otra función dentro del sistema bibliotecario. Probá otra terminal.';
+          fb.hidden = false;
+        }
+      }
+
+      function renderPuzzle1() {
+        const leftWrap = document.getElementById('p1-left-list');
+        const rightWrap = document.getElementById('p1-right-list');
+        leftWrap.innerHTML = '';
+        rightWrap.innerHTML = '';
+
+        const total = Object.keys(state.p1.matched).length;
+        const pct = Math.round((total / 3) * 100);
+        document.getElementById('p1-meter-fill').style.width = `${pct}%`;
+        document.getElementById('p1-meter-pct').textContent = `${pct}%`;
+        const led = document.getElementById('p1-led');
+        led.classList.toggle('online', total === 3);
+        document.getElementById('p1-telemetry-text').textContent =
+          total === 3
+            ? 'SEÑAL DE RED: 3/3 ENLACES ACTIVOS · INTEROPERABILIDAD RESTAURADA'
+            : `SEÑAL DE RED: ${total}/3 ENLACES ACTIVOS · RECONECTANDO SERVICIOS`;
+
+        P1_LEFT.forEach((item) => {
+          const isMatched = Boolean(state.p1.matched[item.id]);
+          const isSelected = state.p1.selectedLeft === item.id;
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.dataset.p1Left = item.id;
+          btn.disabled = isMatched;
+          btn.className = 'patch-node' + (isMatched ? ' is-matched' : isSelected ? ' is-selected' : '');
+          btn.innerHTML = `
+            <div>
+              <span class="patch-node-code">${item.code}${isMatched ? ' · ✓ CONECTADO' : ''}</span>
+              <span>${item.label}</span>
+            </div>
+            <span class="jack-socket" aria-hidden="true"></span>
+          `;
+
+          btn.addEventListener('click', () => {
+            if (isMatched) return;
+            sfxMechanicalClick();
+            state.p1.selectedLeft = item.id;
+            renderPuzzle1();
+          });
+
+          btn.addEventListener('pointerdown', (e) => {
+            if (isMatched || e.pointerType === 'touch' || e.button !== 0) return;
+            state.p1.draggingFrom = item.id;
+            state.p1.selectedLeft = item.id;
+            state.p1.dragPointer = { x: e.clientX, y: e.clientY };
+            leftWrap.querySelectorAll('.patch-node').forEach((n) => n.classList.remove('is-selected'));
+            btn.classList.add('is-selected');
+            drawPatchbayWires();
+          });
+
+          leftWrap.appendChild(btn);
+        });
+
+        P1_RIGHT.forEach((item) => {
+          const isMatched = Boolean(state.p1.matched[item.id]);
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.dataset.p1Right = item.id;
+          btn.disabled = isMatched;
+          btn.className = 'patch-node' + (isMatched ? ' is-matched' : '');
+          btn.innerHTML = `
+            <span class="jack-socket" aria-hidden="true"></span>
+            <div style="flex:1;">
+              <span class="patch-node-code">${item.code}${isMatched ? ' · ✓ ACTIVO' : ''}</span>
+              <span>${item.label}</span>
+            </div>
+          `;
+
+          btn.addEventListener('click', () => {
+            if (isMatched) return;
+            attemptP1Match(state.p1.selectedLeft, item.id, btn);
+          });
+
+          rightWrap.appendChild(btn);
+        });
+
+        requestAnimationFrame(() => drawPatchbayWires());
+      }
+
+      // Global pointer handlers for live cable dragging in Puzzle 1
+      window.addEventListener('pointermove', (e) => {
+        pointerX = e.clientX;
+        pointerY = e.clientY;
+        document.documentElement.style.setProperty('--mx', `${(e.clientX / Math.max(1, vw)) * 100}%`);
+        document.documentElement.style.setProperty('--my', `${(e.clientY / Math.max(1, vh)) * 100}%`);
+
+        if (state.p1.draggingFrom) {
+          state.p1.dragPointer = { x: e.clientX, y: e.clientY };
+          drawPatchbayWires();
+        }
+      });
+
+      window.addEventListener('pointerup', (e) => {
+        if (!state.p1.draggingFrom) return;
+        const fromId = state.p1.draggingFrom;
+        state.p1.draggingFrom = null;
+        state.p1.dragPointer = null;
+
+        const targetEl = document.elementFromPoint(e.clientX, e.clientY);
+        const rightBtn = targetEl ? targetEl.closest('[data-p1-right]') : null;
+        if (rightBtn && !rightBtn.disabled) {
+          attemptP1Match(fromId, rightBtn.dataset.p1Right, rightBtn);
+        } else {
+          drawPatchbayWires();
+        }
+      });
+
+      /* ============================================================
+         PUZZLE 2: ETHICAL DOSSIERS & ANIMATED BRASS BALANCE SCALE
+         ============================================================ */
+      function updateScaleVisual(tiltDeg, title, desc) {
+        state.p2.tilt = tiltDeg;
+        const beam = document.getElementById('scale-beam');
+        beam.style.transform = `rotate(${tiltDeg}deg)`;
+        document.getElementById('scale-status-title').textContent = title;
+        document.getElementById('scale-status-desc').textContent = desc;
+      }
+
+      function renderPuzzle2() {
+        const idx = state.p2.step;
+        const sc = P2_SCENARIOS[idx];
+        document.getElementById('p2-step-badge').textContent = `Candado II · Expediente ${idx + 1} de ${P2_SCENARIOS.length}`;
+        document.getElementById('p2-tag').textContent = sc.tag;
+        document.getElementById('p2-question').textContent = sc.question;
+
+        const stamp = document.getElementById('p2-wax-stamp');
+        stamp.hidden = !state.p2.solvedSteps[idx];
+
+        const fb = document.getElementById('p2-feedback');
+        fb.hidden = true;
+
+        if (idx === 0 && !state.p2.solvedSteps[0]) {
+          updateScaleVisual(-10, 'Balanza en tensión', 'Resolvé el primer expediente para estabilizar el derecho de acceso ciudadano.');
+        } else if (idx === 1 && !state.p2.solvedSteps[1]) {
+          updateScaleVisual(-4, 'Equilibrio parcial (1/2)', 'El primer dictamen fortaleció el acceso. Resolvé el segundo expediente para nivelar la balanza.');
+        }
+
+        const wrap = document.getElementById('p2-options');
+        wrap.innerHTML = '';
+
+        sc.options.forEach((opt) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'resolution-btn';
+          btn.innerHTML = `
+            <span class="resolution-letter">${opt.letter}</span>
+            <span>${opt.text}</span>
+          `;
+
+          btn.addEventListener('click', () => {
+            if (opt.correct) {
+              state.p2.solvedSteps[idx] = true;
+              btn.classList.add('is-approved');
+              stamp.hidden = false;
+              sfxStampThud();
+              const rect = btn.getBoundingClientRect();
+              spawnSparks(rect.right - 30, rect.top + rect.height / 2, 24, ['#34d399', '#fae2a3', '#d9a74a']);
+
+              // Disable options in current dossier
+              wrap.querySelectorAll('button').forEach((b) => { b.disabled = true; });
+
+              if (idx < P2_SCENARIOS.length - 1) {
+                updateScaleVisual(-3, 'Expediente 1 sellado', '¡Excelente criterio! Pasá al segundo expediente para completar el equilibrio.');
+                fb.className = 'puzzle-feedback is-success';
+                fb.innerHTML = `
+                  <span>${opt.hint}</span>
+                  <button id="btn-p2-next" type="button" class="btn-brass" style="min-block-size:40px;padding:0.5rem 1.1rem;font-size:0.78rem;">
+                    Abrir Expediente 2 →
+                  </button>
+                `;
+                fb.hidden = false;
+                document.getElementById('btn-p2-next').addEventListener('click', () => {
+                  sfxMechanicalClick();
+                  state.p2.step = 1;
+                  renderPuzzle2();
+                });
+              } else {
+                state.keys[2] = true;
+                updateScaleVisual(0, 'Equilibrio Democrático Total', 'Ambos expedientes fueron sellados con rigor ético y compromiso social.');
+                fb.className = 'puzzle-feedback is-success';
+                fb.innerHTML = `<span><strong>¡Dictámenes aprobados!</strong> ${opt.hint}</span>`;
+                fb.hidden = false;
+                setTimeout(() => showKeyForgedModal(2), 520);
+              }
+            } else {
+              sfxErrorClunk();
+              btn.classList.add('is-rejected');
+              updateScaleVisual(opt.tilt, 'Desbalance detectado', 'Esa medida restringe derechos o debilita el rol comunicacional de la biblioteca.');
+              fb.className = 'puzzle-feedback is-hint';
+              fb.textContent = opt.hint;
+              fb.hidden = false;
+              setTimeout(() => btn.classList.remove('is-rejected'), 750);
+            }
+          });
+
+          wrap.appendChild(btn);
+        });
+      }
+
+      /* ============================================================
+         PUZZLE 3: METHOD ASTROLABE (DRAG/CLICK) + HOLD-TO-SEAL HYPOTHESIS
+         ============================================================ */
+      function checkPuzzle3Order() {
+        const fb = document.getElementById('p3-feedback');
+        if (state.p3.slots.some((s) => s === null)) {
+          fb.hidden = true;
+          return;
+        }
+        const ok = P3_STAGES_CORRECT.every((st, i) => state.p3.slots[i] === st.id);
+        if (ok) {
+          state.p3.partASolved = true;
+          sfxPlugConnect();
+          fb.hidden = true;
+          renderPuzzle3();
+          const partB = document.getElementById('p3-part-b');
+          partB.scrollIntoView({ behavior: state.motionPaused ? 'auto' : 'smooth', block: 'center' });
+        } else {
+          sfxErrorClunk();
+          fb.className = 'puzzle-feedback is-error';
+          fb.textContent =
+            'El astrolabio aún no encaja: primero formulamos el problema, luego revisamos antecedentes, recolectamos datos y finalmente transferimos los hallazgos. Tocá una etapa ubicada para quitarla o reiniciá el orden.';
+          fb.hidden = false;
+        }
+      }
+
+      function renderPuzzle3() {
+        const poolEl = document.getElementById('p3-pool');
+        const slotsEl = document.getElementById('p3-slots');
+        const partB = document.getElementById('p3-part-b');
+
+        partB.hidden = !state.p3.partASolved;
+        if (state.keys[3]) {
+          document.getElementById('hold-progress-circle').style.strokeDashoffset = '0';
+          document.getElementById('hold-seal-label').textContent = 'Validada ✓';
+        }
+        poolEl.innerHTML = '';
+        slotsEl.innerHTML = '';
+
+        // Available stage plaques
+        P3_STAGES_SHUFFLED.forEach((stage) => {
+          const placed = state.p3.slots.includes(stage.id);
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'method-card';
+          btn.disabled = placed || state.p3.partASolved;
+          btn.draggable = !placed && !state.p3.partASolved;
+          btn.innerHTML = `
+            <span style="color:var(--brass);font-size:1rem;" aria-hidden="true">❖</span>
+            <span>${stage.label}</span>
+          `;
+
+          btn.addEventListener('click', () => {
+            const emptyIdx = state.p3.slots.indexOf(null);
+            if (emptyIdx === -1) return;
+            sfxMechanicalClick();
+            state.p3.slots[emptyIdx] = stage.id;
+            renderPuzzle3();
+            checkPuzzle3Order();
+          });
+
+          btn.addEventListener('dragstart', (e) => {
+            state.p3.dragStageId = stage.id;
+            e.dataTransfer.setData('text/plain', stage.id);
+            e.dataTransfer.effectAllowed = 'move';
+          });
+
+          btn.addEventListener('dragend', () => {
+            state.p3.dragStageId = null;
+          });
+
+          poolEl.appendChild(btn);
+        });
+
+        // 4 Pipeline Slots
+        P3_STAGES_CORRECT.forEach((expected, i) => {
+          const currentId = state.p3.slots[i];
+          const found = P3_STAGES_CORRECT.find((s) => s.id === currentId);
+          const slotBtn = document.createElement('button');
+          slotBtn.type = 'button';
+          slotBtn.disabled = state.p3.partASolved || !found;
+          slotBtn.className = 'method-slot' + (state.p3.partASolved ? ' verified' : found ? ' filled' : '');
+          slotBtn.innerHTML = `
+            <div style="display:flex;align-items:center;gap:0.75rem;">
+              <span class="slot-numeral">${expected.numeral}</span>
+              <span>${found ? found.label : 'Ranura libre — arrastrá o elegí una etapa'}</span>
+            </div>
+            ${found && !state.p3.partASolved ? '<span style="font-size:0.75rem;color:var(--brass-bright);flex-shrink:0;">Quitar ✕</span>' : ''}
+          `;
+
+          slotBtn.addEventListener('click', () => {
+            if (!found || state.p3.partASolved) return;
+            sfxMechanicalClick();
+            state.p3.slots[i] = null;
+            document.getElementById('p3-feedback').hidden = true;
+            renderPuzzle3();
+          });
+
+          slotBtn.addEventListener('dragover', (e) => {
+            if (state.p3.partASolved) return;
+            e.preventDefault();
+            slotBtn.classList.add('drag-over');
+          });
+
+          slotBtn.addEventListener('dragleave', () => {
+            slotBtn.classList.remove('drag-over');
+          });
+
+          slotBtn.addEventListener('drop', (e) => {
+            e.preventDefault();
+            slotBtn.classList.remove('drag-over');
+            if (state.p3.partASolved) return;
+            const stageId = e.dataTransfer.getData('text/plain') || state.p3.dragStageId;
+            if (!stageId) return;
+            const prevIdx = state.p3.slots.indexOf(stageId);
+            if (prevIdx !== -1) state.p3.slots[prevIdx] = null;
+            state.p3.slots[i] = stageId;
+            sfxMechanicalClick();
+            renderPuzzle3();
+            checkPuzzle3Order();
+          });
+
+          slotsEl.appendChild(slotBtn);
+        });
+      }
+
+      // Hold-to-Validate Seal Logic (pointer + keyboard Space/Enter)
+      let holdRAF = null;
+      let holdStart = 0;
+      const HOLD_DURATION = 1300;
+      const HOLD_CIRCUMFERENCE = 446.1;
+
+      function resetHoldVisual() {
+        const btn = document.getElementById('btn-hold-validate');
+        const circle = document.getElementById('hold-progress-circle');
+        const label = document.getElementById('hold-seal-label');
+        btn.classList.remove('charging');
+        circle.style.strokeDashoffset = String(HOLD_CIRCUMFERENCE);
+        label.textContent = state.keys[3] ? 'Validada ✓' : 'Mantené';
+      }
+
+      function completeHypothesisSeal() {
+        cancelAnimationFrame(holdRAF);
+        holdRAF = null;
+        const btn = document.getElementById('btn-hold-validate');
+        btn.classList.remove('charging');
+        document.getElementById('hold-progress-circle').style.strokeDashoffset = '0';
+        document.getElementById('hold-seal-label').textContent = 'Validada ✓';
+        state.keys[3] = true;
+        showKeyForgedModal(3);
+      }
+
+      function startHoldCharge() {
+        if (state.keys[3]) {
+          showKeyForgedModal(3);
+          return;
+        }
+        if (state.motionPaused) {
+          completeHypothesisSeal();
+          return;
+        }
+        if (holdRAF) return;
+        holdStart = performance.now();
+        const btn = document.getElementById('btn-hold-validate');
+        const circle = document.getElementById('hold-progress-circle');
+        const label = document.getElementById('hold-seal-label');
+        btn.classList.add('charging');
+        playTone(260, 1.35, 'sine', 0.06, 0, 740);
+
+        function tick(now) {
+          const progress = Math.min(1, (now - holdStart) / HOLD_DURATION);
+          circle.style.strokeDashoffset = String(HOLD_CIRCUMFERENCE * (1 - progress));
+          label.textContent = `${Math.round(progress * 100)}%`;
+          if (progress >= 1) {
+            completeHypothesisSeal();
+            return;
+          }
+          holdRAF = requestAnimationFrame(tick);
+        }
+        holdRAF = requestAnimationFrame(tick);
+      }
+
+      function cancelHoldCharge() {
+        if (!holdRAF) return;
+        cancelAnimationFrame(holdRAF);
+        holdRAF = null;
+        resetHoldVisual();
+      }
+
+      /* ============================================================
+         CINEMATIC VAULT OPENING SEQUENCE
+         ============================================================ */
+      let openingInProgress = false;
+
+      function triggerVaultOpening() {
+        if (openingInProgress) return;
+        if (!(state.keys[1] && state.keys[2] && state.keys[3])) return;
+        openingInProgress = true;
+
+        const frame = document.getElementById('vault-door-frame');
+        const cinematic = document.getElementById('vault-cinematic');
+        sfxWheelTurnAndOpen();
+
+        if (state.motionPaused) {
+          openingInProgress = false;
+          renderFinale();
+          showScene('finale');
+          return;
+        }
+
+        frame.classList.add('spinning');
+        spawnSparks(vw * 0.5, vh * 0.5, 42);
+
+        setTimeout(() => {
+          cinematic.hidden = false;
+          cinematic.classList.remove('open', 'burst', 'fade', 'show-caption');
+          requestAnimationFrame(() => {
+            cinematic.classList.add('show-caption');
+          });
+        }, 720);
+
+        setTimeout(() => {
+          renderFinale();
+          showScene('finale');
+          cinematic.classList.add('open', 'burst');
+          fireConfettiGrand();
+        }, 1420);
+
+        setTimeout(() => {
+          cinematic.classList.remove('show-caption');
+          cinematic.classList.add('fade');
+        }, 2350);
+
+        setTimeout(() => {
+          cinematic.hidden = true;
+          cinematic.classList.remove('open', 'burst', 'fade', 'show-caption');
+          frame.classList.remove('spinning');
+          openingInProgress = false;
+        }, 3000);
+      }
+
+      /* ============================================================
+         SCENE 4: GRAND REVEAL, TUMBLER SCORES, ENVELOPE & HD DIPLOMA
+         ============================================================ */
+      function animateTumblers() {
+        const ids = ['tumbler-1', 'tumbler-2', 'tumbler-3'];
+        if (state.motionPaused) {
+          ids.forEach((id) => { document.getElementById(id).textContent = '10'; });
+          return;
+        }
+        ids.forEach((id, idx) => {
+          const el = document.getElementById(id);
+          let val = 0;
+          el.textContent = '00';
+          setTimeout(() => {
+            const iv = setInterval(() => {
+              val += 1;
+              el.textContent = val < 10 ? '0' + val : String(val);
+              if (val >= 10) {
+                clearInterval(iv);
+                playTone(587.33 + idx * 140, 0.28, 'triangle', 0.06, 0);
+              }
+            }, 55);
+          }, 220 + idx * 240);
+        });
+      }
+
+      function renderFinale() {
+        document.getElementById('finale-student-name').textContent = state.studentName || 'Estudiante de Bibliotecología';
+        document.getElementById('finale-letter-body').textContent = state.config.message;
+        document.getElementById('finale-letter-signature').textContent = '— ' + state.config.signature;
+        document.getElementById('envelope-closed').hidden = state.envelopeOpen;
+        document.getElementById('letter-open').hidden = !state.envelopeOpen;
+        animateTumblers();
+        drawDiploma();
+      }
+
+      /* ============================================================
+         MUSEUM-GRADE HIGH-RES CANVAS DIPLOMA (1800 x 1272)
+         ============================================================ */
+      function drawDiploma() {
+        const canvas = document.getElementById('diploma-canvas');
+        const ctx = canvas.getContext('2d');
+        const W = canvas.width;
+        const H = canvas.height;
+
+        // 1. Warm Ivory Parchment Base
+        const bg = ctx.createLinearGradient(0, 0, W, H);
+        bg.addColorStop(0, '#fdf9ef');
+        bg.addColorStop(0.5, '#f7ecd6');
+        bg.addColorStop(1, '#efe0be');
+        ctx.fillStyle = bg;
+        ctx.fillRect(0, 0, W, H);
+
+        // Soft paper vignette
+        const vig = ctx.createRadialGradient(W / 2, H / 2, 180, W / 2, H / 2, W * 0.68);
+        vig.addColorStop(0, 'rgba(255, 255, 255, 0.48)');
+        vig.addColorStop(1, 'rgba(139, 94, 29, 0.14)');
+        ctx.fillStyle = vig;
+        ctx.fillRect(0, 0, W, H);
+
+        // Subtle Center Watermark Crest (Astrolabe + Key Rings)
+        ctx.save();
+        ctx.translate(W / 2, H / 2 - 20);
+        ctx.strokeStyle = 'rgba(180, 131, 47, 0.08)';
+        ctx.lineWidth = 3;
+        [240, 295, 340].forEach((r, i) => {
+          ctx.beginPath();
+          if (i === 1) ctx.setLineDash([12, 10]);
+          else ctx.setLineDash([]);
+          ctx.arc(0, 0, r, 0, Math.PI * 2);
+          ctx.stroke();
+        });
+        ctx.setLineDash([]);
+        ctx.restore();
+
+        // 2. Triple Ornate Gold & Umber Borders
+        ctx.strokeStyle = '#7e5618';
+        ctx.lineWidth = 10;
+        ctx.strokeRect(38, 38, W - 76, H - 76);
+
+        ctx.strokeStyle = '#d4a34a';
+        ctx.lineWidth = 3;
+        ctx.strokeRect(58, 58, W - 116, H - 116);
+
+        ctx.strokeStyle = 'rgba(156, 111, 39, 0.45)';
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(70, 70, W - 140, H - 140);
+
+        // Ornamental Art-Deco Filigree Corners
+        function drawCorner(x, y, sx, sy) {
+          ctx.save();
+          ctx.translate(x, y);
+          ctx.scale(sx, sy);
+          ctx.strokeStyle = '#9c6b1f';
+          ctx.lineWidth = 3;
+          ctx.beginPath();
+          ctx.moveTo(0, 56);
+          ctx.lineTo(0, 0);
+          ctx.lineTo(56, 0);
+          ctx.stroke();
+          ctx.fillStyle = '#c59237';
+          ctx.beginPath();
+          ctx.arc(16, 16, 6, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.strokeStyle = '#c59237';
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.arc(0, 0, 34, 0, Math.PI / 2);
+          ctx.stroke();
+          ctx.restore();
+        }
+        drawCorner(82, 82, 1, 1);
+        drawCorner(W - 82, 82, -1, 1);
+        drawCorner(82, H - 82, 1, -1);
+        drawCorner(W - 82, H - 82, -1, -1);
+
+        // 3. Top Header Institution
+        ctx.textAlign = 'center';
+        ctx.fillStyle = '#7c5319';
+        ctx.font = '700 25px "Plus Jakarta Sans", system-ui, sans-serif';
+        ctx.fillText(state.config.institution.toUpperCase(), W / 2, 146);
+
+        // Small Gold Divider with Diamond
+        ctx.strokeStyle = '#c8973d';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(W / 2 - 220, 174);
+        ctx.lineTo(W / 2 - 18, 174);
+        ctx.moveTo(W / 2 + 18, 174);
+        ctx.lineTo(W / 2 + 220, 174);
+        ctx.stroke();
+        ctx.fillStyle = '#b78127';
+        ctx.beginPath();
+        ctx.moveTo(W / 2, 165);
+        ctx.lineTo(W / 2 + 9, 174);
+        ctx.lineTo(W / 2, 183);
+        ctx.lineTo(W / 2 - 9, 174);
+        ctx.closePath();
+        ctx.fill();
+
+        // Main Title
+        ctx.fillStyle = '#231709';
+        ctx.font = '700 66px Cinzel, Georgia, "Times New Roman", serif';
+        ctx.fillText('DIPLOMA DE HONOR Y DESPEDIDA', W / 2, 256);
+
+        // Subtitle
+        ctx.fillStyle = '#634721';
+        ctx.font = 'italic 36px "Cormorant Garamond", Georgia, serif';
+        ctx.fillText('Se otorga la presente constancia simbólica a', W / 2, 330);
+
+        // Student Name (Auto-fit font size for long names)
+        const displayName = state.studentName || 'Estudiante de Bibliotecología';
+        let nameSize = 84;
+        ctx.font = `700 ${nameSize}px Cinzel, Georgia, serif`;
+        while (ctx.measureText(displayName).width > W - 280 && nameSize > 44) {
+          nameSize -= 4;
+          ctx.font = `700 ${nameSize}px Cinzel, Georgia, serif`;
+        }
+        ctx.fillStyle = '#1b1106';
+        ctx.fillText(displayName, W / 2, 434);
+
+        // Decorative Name Rule
+        ctx.strokeStyle = '#c8973d';
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.moveTo(W / 2 - 390, 464);
+        ctx.lineTo(W / 2 + 390, 464);
+        ctx.stroke();
+
+        // Recognition Copy
+        ctx.fillStyle = '#3a2915';
+        ctx.font = '500 28px "Plus Jakarta Sans", system-ui, sans-serif';
+        ctx.fillText('Por haber abierto La Bóveda de las 3 Llaves y coronar el ciclo lectivo con un', W / 2, 526);
+
+        ctx.fillStyle = '#855310';
+        ctx.font = '800 32px "Plus Jakarta Sans", system-ui, sans-serif';
+        ctx.fillText('trabajo compuesto sobresaliente — Calificación final: 10 (DIEZ)', W / 2, 574);
+
+        // 4. Three Subjects Ledger Box
+        const boxW = 1360;
+        const boxH = 236;
+        const boxX = (W - boxW) / 2;
+        const boxY = 626;
+        ctx.fillStyle = 'rgba(200, 151, 61, 0.1)';
+        ctx.strokeStyle = 'rgba(138, 94, 28, 0.48)';
+        ctx.lineWidth = 2;
+        ctx.fillRect(boxX, boxY, boxW, boxH);
+        ctx.strokeRect(boxX, boxY, boxW, boxH);
+
+        const subjects = [
+          'Llave I  ·  Tecnologías de procesos y servicios en bibliotecas',
+          'Llave II  ·  Políticas de Información y Comunicación',
+          'Llave III  ·  Metodología de Investigación en Unidades de Información'
+        ];
+        subjects.forEach((subj, i) => {
+          const y = boxY + 62 + i * 64;
+          if (i > 0) {
+            ctx.strokeStyle = 'rgba(156, 111, 39, 0.22)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(boxX + 36, y - 38);
+            ctx.lineTo(boxX + boxW - 36, y - 38);
+            ctx.stroke();
+          }
+          ctx.textAlign = 'left';
+          ctx.fillStyle = '#261a0c';
+          ctx.font = '600 27px "Plus Jakarta Sans", system-ui, sans-serif';
+          ctx.fillText(subj, boxX + 46, y);
+
+          ctx.textAlign = 'right';
+          ctx.fillStyle = '#8d590f';
+          ctx.font = '700 30px Cinzel, Georgia, serif';
+          ctx.fillText('10 · SOBRESALIENTE', boxX + boxW - 46, y);
+        });
+
+        // 5. Ribbon & Embossed Gold/Crimson Wax Seal (Right Bottom)
+        const sealX = W - 290;
+        const sealY = 1018;
+        ctx.save();
+        // Crimson Ribbon Tails
+        ctx.fillStyle = '#8b1d1d';
+        ctx.beginPath();
+        ctx.moveTo(sealX - 36, sealY + 40);
+        ctx.lineTo(sealX - 66, sealY + 158);
+        ctx.lineTo(sealX - 24, sealY + 132);
+        ctx.lineTo(sealX - 4, sealY + 162);
+        ctx.lineTo(sealX - 2, sealY + 46);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.moveTo(sealX + 36, sealY + 40);
+        ctx.lineTo(sealX + 66, sealY + 158);
+        ctx.lineTo(sealX + 24, sealY + 132);
+        ctx.lineTo(sealX + 4, sealY + 162);
+        ctx.lineTo(sealX + 2, sealY + 46);
+        ctx.closePath();
+        ctx.fill();
+
+        // Scalloped Seal Rim
+        ctx.beginPath();
+        const teeth = 24;
+        for (let i = 0; i < teeth * 2; i++) {
+          const ang = (i * Math.PI) / teeth;
+          const rad = i % 2 === 0 ? 96 : 86;
+          const px = sealX + Math.cos(ang) * rad;
+          const py = sealY + Math.sin(ang) * rad;
+          if (i === 0) ctx.moveTo(px, py);
+          else ctx.lineTo(px, py);
+        }
+        ctx.closePath();
+        const sealGrad = ctx.createRadialGradient(sealX - 24, sealY - 24, 12, sealX, sealY, 98);
+        sealGrad.addColorStop(0, '#fff2c2');
+        sealGrad.addColorStop(0.55, '#d5a140');
+        sealGrad.addColorStop(1, '#7a5011');
+        ctx.fillStyle = sealGrad;
+        ctx.fill();
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = '#5e3b09';
+        ctx.stroke();
+
+        // Inner Ring
+        ctx.beginPath();
+        ctx.arc(sealX, sealY, 72, 0, Math.PI * 2);
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = 'rgba(255, 250, 230, 0.8)';
+        ctx.stroke();
+
+        ctx.textAlign = 'center';
+        ctx.fillStyle = '#261704';
+        ctx.font = '900 58px Cinzel, Georgia, serif';
+        ctx.fillText('10', sealX, sealY + 14);
+        ctx.font = '700 15px "Plus Jakarta Sans", system-ui, sans-serif';
+        ctx.fillText('CICLO 2026', sealX, sealY + 42);
+        ctx.restore();
+
+        // 6. Date, Signature & Closing Quote (Left Bottom)
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#634721';
+        ctx.font = '600 25px "Plus Jakarta Sans", system-ui, sans-serif';
+        ctx.fillText(state.config.dateText || DEFAULTS.dateText, 220, 972);
+
+        ctx.strokeStyle = '#9c6f27';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(220, 1018);
+        ctx.lineTo(860, 1018);
+        ctx.stroke();
+
+        ctx.fillStyle = '#231709';
+        ctx.font = 'italic 700 36px "Cormorant Garamond", Georgia, serif';
+        ctx.fillText(state.config.signature, 220, 1068);
+
+        ctx.fillStyle = '#7c5319';
+        ctx.font = 'italic 24px "Cormorant Garamond", Georgia, serif';
+        ctx.fillText(
+          '«Gracias por el entusiasmo, la predisposición y la mirada crítica con que hacen brillar cada biblioteca.»',
+          220,
+          1120,
+          1130
+        );
+      }
+
+      /* ============================================================
+         RESET & INIT BINDINGS
+         ============================================================ */
+      function resetAll() {
+        state.studentName = '';
+        state.keys = { 1: false, 2: false, 3: false };
+        state.animatedKeys = { 1: false, 2: false, 3: false };
+        state.pendingBoltKey = null;
+        state.envelopeOpen = false;
+        state.p1 = { selectedLeft: null, matched: {}, draggingFrom: null, dragPointer: null };
+        state.p2 = { step: 0, solvedSteps: [false, false], tilt: -10 };
+        state.p3 = { slots: [null, null, null, null], partASolved: false, dragStageId: null };
+        document.getElementById('input-student-name').value = '';
+        document.getElementById('credential-live-preview').textContent = 'Sin inscribir';
+        document.getElementById('hud-student-pill').hidden = true;
+        document.getElementById('p1-feedback').hidden = true;
+        document.getElementById('p2-feedback').hidden = true;
+        document.getElementById('p3-feedback').hidden = true;
+        resetHoldVisual();
+        showScene('welcome');
+      }
+
+      function init() {
+        loadConfig();
+        document.getElementById('hud-institution').textContent = state.config.institution;
+        syncMotionUI();
+        resizeCanvases();
+        requestAnimationFrame(renderAmbientFrame);
+        window.addEventListener('resize', resizeCanvases);
+
+        // Live credential preview while typing name
+        const nameInput = document.getElementById('input-student-name');
+        const livePreview = document.getElementById('credential-live-preview');
+        nameInput.addEventListener('input', () => {
+          const val = nameInput.value.trim();
+          livePreview.textContent = val || 'Sin inscribir';
+          if (val) {
+            document.getElementById('welcome-error').hidden = true;
+            nameInput.removeAttribute('aria-invalid');
+          }
+        });
+
+        // Start form submission
+        document.getElementById('form-start').addEventListener('submit', (e) => {
+          e.preventDefault();
+          const val = nameInput.value.trim();
+          const err = document.getElementById('welcome-error');
+          if (!val) {
+            err.hidden = false;
+            nameInput.setAttribute('aria-invalid', 'true');
+            sfxErrorClunk();
+            nameInput.focus();
+            return;
+          }
+          err.hidden = true;
+          nameInput.removeAttribute('aria-invalid');
+          state.studentName = val;
+          sfxPlugConnect();
+          renderChamber();
+          showScene('chamber');
+        });
+
+        // Chamber Lock Stations
+        document.getElementById('station-lock-1').addEventListener('click', () => {
+          sfxMechanicalClick();
+          renderPuzzle1();
+          showScene('puzzle-1');
+        });
+
+        document.getElementById('station-lock-2').addEventListener('click', () => {
+          sfxMechanicalClick();
+          if (!state.keys[2]) state.p2.step = state.p2.solvedSteps[0] ? 1 : 0;
+          renderPuzzle2();
+          showScene('puzzle-2');
+        });
+
+        document.getElementById('station-lock-3').addEventListener('click', () => {
+          sfxMechanicalClick();
+          renderPuzzle3();
+          showScene('puzzle-3');
+        });
+
+        // Back to chamber buttons
+        document.querySelectorAll('.btn-back-chamber').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            sfxMechanicalClick();
+            renderChamber();
+            showScene('chamber');
+          });
+        });
+
+        // Key Forged Continue Button -> Returns to Chamber with live mechanical bolt retraction
+        const forgeDlg = document.getElementById('forge-dialog');
+        function returnFromForgeDialog() {
+          const boltToAnimate = state.pendingBoltKey;
+          renderChamber();
+          showScene('chamber');
+          if (boltToAnimate) {
+            setTimeout(() => {
+              state.animatedKeys[boltToAnimate] = true;
+              state.pendingBoltKey = null;
+              const bolt = document.getElementById(`bolt-${boltToAnimate}`);
+              const conduit = document.getElementById(`conduit-${boltToAnimate}`);
+              if (bolt) bolt.classList.add('retracted');
+              if (conduit) conduit.classList.add('lit');
+              sfxBoltRetract();
+              const doorEl = document.getElementById('vault-door-frame');
+              const r = doorEl ? doorEl.getBoundingClientRect() : { left: vw * 0.5, top: vh * 0.48, width: 0, height: 0 };
+              spawnSparks(r.left + r.width / 2, r.top + r.height / 2, 30);
+            }, 340);
+          }
+        }
+
+        document.getElementById('btn-forge-continue').addEventListener('click', () => {
+          forgeDlg.close('continue');
+        });
+        forgeDlg.addEventListener('close', () => {
+          forgeDlg.returnValue = '';
+          returnFromForgeDialog();
+        });
+
+        // Redraw high-res Canvas Diploma once display fonts finish loading
+        if (document.fonts && document.fonts.ready) {
+          document.fonts.ready.then(() => {
+            if (state.currentScene === 'finale') drawDiploma();
+          });
+        }
+
+        // Puzzle 3 reset & Hold-to-Validate bindings
+        document.getElementById('btn-p3-reset').addEventListener('click', () => {
+          sfxMechanicalClick();
+          state.p3.slots = [null, null, null, null];
+          document.getElementById('p3-feedback').hidden = true;
+          renderPuzzle3();
+        });
+
+        const holdBtn = document.getElementById('btn-hold-validate');
+        holdBtn.addEventListener('pointerdown', (e) => {
+          if (e.button !== 0 && e.pointerType === 'mouse') return;
+          startHoldCharge();
+        });
+        holdBtn.addEventListener('pointerup', cancelHoldCharge);
+        holdBtn.addEventListener('pointerleave', cancelHoldCharge);
+        holdBtn.addEventListener('pointercancel', cancelHoldCharge);
+        holdBtn.addEventListener('keydown', (e) => {
+          if (e.key === ' ' || e.key === 'Enter') {
+            e.preventDefault();
+            startHoldCharge();
+          }
+        });
+        holdBtn.addEventListener('keyup', (e) => {
+          if (e.key === ' ' || e.key === 'Enter') {
+            cancelHoldCharge();
+          }
+        });
+
+        // Open Vault triggers (Central Wheel & Side CTA)
+        document.getElementById('btn-turn-wheel').addEventListener('click', triggerVaultOpening);
+        document.getElementById('btn-open-vault-cta').addEventListener('click', triggerVaultOpening);
+
+        // Finale: Interactive 3D Foil Medallion Tilt
+        const medallion = document.getElementById('medallion-3d');
+        const sheen = document.getElementById('medallion-sheen');
+        medallion.addEventListener('pointermove', (e) => {
+          if (state.motionPaused) return;
+          const r = medallion.getBoundingClientRect();
+          const nx = ((e.clientX - r.left) / r.width) - 0.5;
+          const ny = ((e.clientY - r.top) / r.height) - 0.5;
+          medallion.style.transform = `rotateY(${nx * 24}deg) rotateX(${-ny * 24}deg) scale(1.04)`;
+          sheen.style.transform = `translateX(${nx * 80}%) rotate(15deg)`;
+        });
+        medallion.addEventListener('pointerleave', () => {
+          medallion.style.transform = '';
+          sheen.style.transform = 'translateX(-35%) rotate(15deg)';
+        });
+
+        // Finale: Open Wax-Sealed Farewell Envelope
+        document.getElementById('btn-open-envelope').addEventListener('click', () => {
+          state.envelopeOpen = true;
+          sfxPaperUnfold();
+          const btn = document.getElementById('btn-open-envelope');
+          const r = btn.getBoundingClientRect();
+          spawnSparks(r.left + r.width / 2, r.top + r.height / 2, 26, ['#fae2a3', '#dc2626', '#f59e0b']);
+          document.getElementById('envelope-closed').hidden = true;
+          document.getElementById('letter-open').hidden = false;
+          document.getElementById('letter-heading').focus();
+        });
+
+        // Finale: Download Diploma PNG
+        document.getElementById('btn-download-diploma').addEventListener('click', () => {
+          sfxMechanicalClick();
+          drawDiploma();
+          const canvas = document.getElementById('diploma-canvas');
+          const link = document.createElement('a');
+          const safeName = (state.studentName || 'Estudiante')
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/[^a-zA-Z0-9]+/g, '_')
+            .replace(/^_|_$/g, '');
+          link.download = `Diploma_Boveda_10_${safeName || 'Bibliotecologia'}.png`;
+          link.href = canvas.toDataURL('image/png');
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          showToast('Diploma de Honor descargado en PNG.', true);
+        });
+
+        document.getElementById('btn-celebrate-again').addEventListener('click', () => {
+          sfxKeyForged();
+          fireConfettiGrand();
+        });
+
+        document.getElementById('btn-restart-all').addEventListener('click', () => {
+          sfxMechanicalClick();
+          resetAll();
+        });
+
+        // HUD: Motion Pause/Play Toggle (WCAG 2.2.2)
+        document.getElementById('btn-motion-toggle').addEventListener('click', () => {
+          state.motionPaused = !state.motionPaused;
+          syncMotionUI();
+          showToast(state.motionPaused ? 'Animaciones ambientales pausadas.' : 'Animaciones ambientales activadas.');
+        });
+
+        // HUD: Sound Toggle
+        document.getElementById('btn-sound-toggle').addEventListener('click', () => {
+          state.muted = !state.muted;
+          document.getElementById('icon-sound-on').hidden = state.muted;
+          document.getElementById('icon-sound-off').hidden = !state.muted;
+          const btn = document.getElementById('btn-sound-toggle');
+          btn.setAttribute('aria-label', state.muted ? 'Activar sonido' : 'Silenciar sonido');
+          document.getElementById('label-sound').textContent = state.muted ? 'Silenciado' : 'Sonido';
+          if (!state.muted) sfxMechanicalClick();
+          showToast(state.muted ? 'Sonido silenciado.' : 'Sonido activado.');
+        });
+
+        // Native <dialog> Modo Docente + Modern Light-Dismiss Fallback
+        const modal = document.getElementById('modal-config');
+
+        if (!('closedBy' in HTMLDialogElement.prototype)) {
+          const isOutside = (e, dlg) => {
+            const r = dlg.getBoundingClientRect();
+            return e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom;
+          };
+          let pressedOutside = false;
+          modal.addEventListener('pointerdown', (e) => { pressedOutside = isOutside(e, modal); });
+          modal.addEventListener('pointerup', (e) => {
+            if (pressedOutside && isOutside(e, modal)) modal.close();
+          });
+        }
+
+        modal.addEventListener('close', () => {
+          modal.returnValue = '';
+        });
+
+        document.getElementById('btn-open-config').addEventListener('click', () => {
+          sfxMechanicalClick();
+          document.getElementById('cfg-institution').value = state.config.institution;
+          document.getElementById('cfg-date').value = state.config.dateText;
+          document.getElementById('cfg-signature').value = state.config.signature;
+          document.getElementById('cfg-message').value = state.config.message;
+          modal.showModal();
+        });
+
+        document.getElementById('btn-close-config').addEventListener('click', () => {
+          modal.close();
+        });
+
+        document.getElementById('btn-reset-config').addEventListener('click', () => {
+          document.getElementById('cfg-institution').value = DEFAULTS.institution;
+          document.getElementById('cfg-date').value = DEFAULTS.dateText;
+          document.getElementById('cfg-signature').value = DEFAULTS.signature;
+          document.getElementById('cfg-message').value = DEFAULTS.message;
+        });
+
+        document.getElementById('form-config').addEventListener('submit', (e) => {
+          e.preventDefault();
+          state.config.institution = document.getElementById('cfg-institution').value.trim() || DEFAULTS.institution;
+          state.config.dateText = document.getElementById('cfg-date').value.trim() || DEFAULTS.dateText;
+          state.config.signature = document.getElementById('cfg-signature').value.trim() || DEFAULTS.signature;
+          state.config.message = document.getElementById('cfg-message').value.trim() || DEFAULTS.message;
+          saveConfig();
+          document.getElementById('hud-institution').textContent = state.config.institution;
+          if (state.currentScene === 'finale') {
+            renderFinale();
+          }
+          modal.close();
+          showToast('Carta y diploma actualizados.', true);
+        });
+
+        document.getElementById('btn-copy-share-link').addEventListener('click', async () => {
+          const payload = {
+            institution: document.getElementById('cfg-institution').value.trim() || DEFAULTS.institution,
+            dateText: document.getElementById('cfg-date').value.trim() || DEFAULTS.dateText,
+            signature: document.getElementById('cfg-signature').value.trim() || DEFAULTS.signature,
+            message: document.getElementById('cfg-message').value.trim() || DEFAULTS.message
+          };
+          const b64 = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
+          const url = `${window.location.href.split('#')[0]}#cfg=${encodeURIComponent(b64)}`;
+          try {
+            await navigator.clipboard.writeText(url);
+            showToast('Enlace con tu carta personalizada copiado al portapapeles.', true);
+          } catch {
+            window.location.hash = `cfg=${encodeURIComponent(b64)}`;
+            showToast('Configuración aplicada en la URL actual para compartir.', true);
+          }
+        });
+
+        document.getElementById('btn-preview-finale').addEventListener('click', () => {
+          state.config.institution = document.getElementById('cfg-institution').value.trim() || DEFAULTS.institution;
+          state.config.dateText = document.getElementById('cfg-date').value.trim() || DEFAULTS.dateText;
+          state.config.signature = document.getElementById('cfg-signature').value.trim() || DEFAULTS.signature;
+          state.config.message = document.getElementById('cfg-message').value.trim() || DEFAULTS.message;
+          saveConfig();
+          document.getElementById('hud-institution').textContent = state.config.institution;
+          if (!state.studentName) state.studentName = 'Sofía Martínez';
+          state.keys = { 1: true, 2: true, 3: true };
+          document.getElementById('hud-student-name').textContent = state.studentName;
+          document.getElementById('hud-student-pill').hidden = false;
+          modal.close();
+          renderFinale();
+          showScene('finale');
+          fireConfettiGrand();
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>
