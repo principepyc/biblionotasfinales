@@ -2126,6 +2126,10 @@
       gap: 0.95rem;
     }
 
+    .dialog-form[hidden] {
+      display: none;
+    }
+
     .dialog-form label {
       display: block;
       font-size: 0.74rem;
@@ -3102,10 +3106,36 @@
         </button>
       </div>
 
-      <form id="form-config" class="dialog-form">
+      <!-- Teacher Passcode Gate -->
+      <form id="form-teacher-auth" class="dialog-form" novalidate>
+        <p style="margin:0;font-size:0.88rem;line-height:1.5;color:var(--text-secondary);">
+          Este panel está reservado para el equipo docente. Ingresá tu clave para editar la carta de despedida, la firma o la vista previa.
+        </p>
+        <div>
+          <label for="cfg-passcode">Clave de acceso docente</label>
+          <input
+            id="cfg-passcode"
+            type="password"
+            autocomplete="off"
+            required
+            aria-describedby="cfg-passcode-error"
+            placeholder="Ingresá la clave docente"
+            class="brass-input"
+            autofocus
+          />
+          <p id="cfg-passcode-error" class="error-msg" hidden>Clave incorrecta. Este panel es de uso exclusivo docente.</p>
+        </div>
+        <div class="dialog-actions">
+          <button type="submit" class="btn-brass" style="width:100%;">
+            Desbloquear Modo Docente
+          </button>
+        </div>
+      </form>
+
+      <form id="form-config" class="dialog-form" hidden>
         <div>
           <label for="cfg-institution">Institución / Encabezado del diploma</label>
-          <input id="cfg-institution" type="text" class="brass-input" autofocus />
+          <input id="cfg-institution" type="text" class="brass-input" />
         </div>
 
         <div class="dialog-grid-2">
@@ -3139,6 +3169,9 @@
         </div>
 
         <div class="dialog-actions">
+          <button id="btn-lock-teacher" type="button" class="btn-ghost" style="margin-right:auto;">
+            Bloquear panel
+          </button>
           <button id="btn-reset-config" type="button" class="btn-ghost">
             Restaurar original
           </button>
@@ -3166,6 +3199,8 @@
       };
 
       const STORAGE_KEY = 'boveda_3_llaves_premium_cfg_v3';
+      const TEACHER_HASH_SHA256 = '24fa437b11f2c331c095705eaaf715035419c920a86ddfea089980531b47ae77';
+      const TEACHER_HASH_FNV1A = 'a5dcc055';
 
       const P1_LEFT = [
         { id: 'meta', code: 'MOD-01 · METADATOS', label: 'Estándares de metadatos (MARC 21 / Dublin Core)' },
@@ -3293,6 +3328,7 @@
         animatedKeys: { 1: false, 2: false, 3: false },
         pendingBoltKey: null,
         envelopeOpen: false,
+        teacherUnlocked: false,
         config: { ...DEFAULTS },
         p1: {
           selectedLeft: null,
@@ -4662,6 +4698,7 @@
         state.animatedKeys = { 1: false, 2: false, 3: false };
         state.pendingBoltKey = null;
         state.envelopeOpen = false;
+        state.teacherUnlocked = false;
         state.p1 = { selectedLeft: null, matched: {}, draggingFrom: null, dragPointer: null };
         state.p2 = { step: 0, solvedSteps: [false, false], tilt: -10 };
         state.p3 = { slots: [null, null, null, null], partASolved: false, dragStageId: null };
@@ -4889,8 +4926,51 @@
           showToast(state.muted ? 'Sonido silenciado.' : 'Sonido activado.');
         });
 
-        // Native <dialog> Modo Docente + Modern Light-Dismiss Fallback
+        // Native <dialog> Modo Docente + Passcode Gate + Modern Light-Dismiss Fallback
         const modal = document.getElementById('modal-config');
+        const authForm = document.getElementById('form-teacher-auth');
+        const configForm = document.getElementById('form-config');
+        const passInput = document.getElementById('cfg-passcode');
+        const passError = document.getElementById('cfg-passcode-error');
+
+        async function verifyTeacherPasscode(raw) {
+          const val = (raw || '').trim();
+          if (!val) return false;
+          if (window.crypto && window.crypto.subtle && typeof TextEncoder !== 'undefined') {
+            try {
+              const buf = await window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(val));
+              const hex = Array.from(new Uint8Array(buf))
+                .map((b) => b.toString(16).padStart(2, '0'))
+                .join('');
+              return hex === TEACHER_HASH_SHA256;
+            } catch {
+              // Fall through to sync hash
+            }
+          }
+          let h = 2166136261 >>> 0;
+          for (let i = 0; i < val.length; i++) {
+            h ^= val.charCodeAt(i);
+            h = Math.imul(h, 16777619) >>> 0;
+          }
+          return h.toString(16) === TEACHER_HASH_FNV1A;
+        }
+
+        function syncTeacherDialogMode() {
+          if (state.teacherUnlocked) {
+            authForm.hidden = true;
+            configForm.hidden = false;
+            document.getElementById('cfg-institution').value = state.config.institution;
+            document.getElementById('cfg-date').value = state.config.dateText;
+            document.getElementById('cfg-signature').value = state.config.signature;
+            document.getElementById('cfg-message').value = state.config.message;
+          } else {
+            authForm.hidden = false;
+            configForm.hidden = true;
+            passInput.value = '';
+            passError.hidden = true;
+            passInput.removeAttribute('aria-invalid');
+          }
+        }
 
         if (!('closedBy' in HTMLDialogElement.prototype)) {
           const isOutside = (e, dlg) => {
@@ -4906,15 +4986,51 @@
 
         modal.addEventListener('close', () => {
           modal.returnValue = '';
+          passInput.value = '';
+          passError.hidden = true;
+          passInput.removeAttribute('aria-invalid');
         });
 
         document.getElementById('btn-open-config').addEventListener('click', () => {
           sfxMechanicalClick();
-          document.getElementById('cfg-institution').value = state.config.institution;
-          document.getElementById('cfg-date').value = state.config.dateText;
-          document.getElementById('cfg-signature').value = state.config.signature;
-          document.getElementById('cfg-message').value = state.config.message;
+          syncTeacherDialogMode();
           modal.showModal();
+          if (state.teacherUnlocked) {
+            document.getElementById('cfg-institution').focus();
+          } else {
+            passInput.focus();
+          }
+        });
+
+        passInput.addEventListener('input', () => {
+          passError.hidden = true;
+          passInput.removeAttribute('aria-invalid');
+        });
+
+        authForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const ok = await verifyTeacherPasscode(passInput.value);
+          if (!ok) {
+            sfxErrorClunk();
+            passError.hidden = false;
+            passInput.setAttribute('aria-invalid', 'true');
+            passInput.value = '';
+            passInput.focus();
+            return;
+          }
+          state.teacherUnlocked = true;
+          sfxPlugConnect();
+          syncTeacherDialogMode();
+          document.getElementById('cfg-institution').focus();
+          showToast('Modo Docente desbloqueado.', true);
+        });
+
+        document.getElementById('btn-lock-teacher').addEventListener('click', () => {
+          sfxMechanicalClick();
+          state.teacherUnlocked = false;
+          syncTeacherDialogMode();
+          modal.close();
+          showToast('Panel docente bloqueado nuevamente.');
         });
 
         document.getElementById('btn-close-config').addEventListener('click', () => {
